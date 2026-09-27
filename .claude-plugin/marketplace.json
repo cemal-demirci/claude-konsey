@@ -1,0 +1,15 @@
+{
+  "name": "claude-konsey",
+  "description": "Konsey: kararları bağımsız uzman üyelere tartıştıran Claude Code eklentisi",
+  "owner": {
+    "name": "Cemal Demirci"
+  },
+  "plugins": [
+    {
+      "name": "konsey",
+      "source": "./",
+      "description": "Kararları 7 bağımsız uzman üyeye tartıştırıp güven yüzdeli bir hüküm veren konsey. Temalar: klasik, kurtlar.",
+      "version": "2.0.0"
+    }
+  ]
+}
