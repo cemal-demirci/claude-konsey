@@ -8,6 +8,7 @@ description: >
   "konseyi topla", "konseye sor", "kurtlar konseyi", "council", "farklı açılardan tartışın", "stratejist/analist/
   mühendis/eleştirmen gözüyle değerlendir", "debate this", "stress-test this". Sıradan kod ya da nasıl-yapılır
   sorularında tetiklenme.
+allowed-tools: Read(~/.claude/konsey.json), Write(KONSEY.md), Edit(KONSEY.md)
 ---
 
 # Konsey
@@ -26,15 +27,24 @@ görüşünü yazar; tartışma bu bağımsız görüşlerden kurulur; başkan o
 
 İstekten çıkar; yoksa varsayılan.
 
+**Ayar dosyaları.** İstek temayı ve modu birlikte belirtmiyorsa, başka bir şey yapmadan önce şu iki dosyayı Read ile
+okumayı dene (yoksa hata normaldir, geç): proje kökündeki `.claude/konsey.json` ve kullanıcının
+`~/.claude/konsey.json` dosyası. Biçim: `{ "tema": "kurtlar", "mod": "hizli" }` (iki alan da isteğe bağlı).
+
 - **Tema**: `klasik` | `kurtlar`. Öncelik sırası: (1) istekte geçen ("kurtlar konseyi", `--tema kurtlar`);
-  (2) CLAUDE.md ya da hafızada yazan bir tercih ("Konsey teması: kurtlar"); (3) `~/.claude/konsey.json` içindeki
-  `"tema"` (varsa ve izin istemeden okunabiliyorsa); (4) `klasik`. Başka bir tema adı verildiyse
-  `themes/<ad>.md` dosyasını oku (aynı tablo biçimi).
-- **Mod**: `standart` (varsayılan) | `hizli` | `derin`. "hızlı/kısaca" → hizli; "derin/detaylı/çapraz sorgu" →
-  derin. Varsayılan mod da temayla aynı öncelik sırasıyla (CLAUDE.md/hafıza, sonra `konsey.json` içindeki `"mod"`) değişebilir. Alt-ajan (Agent) aracın yoksa her zaman `hizli`.
-- **Üyeler**: varsayılan yedisi. `--uyeler eleştirmen,mühendis,analist` ya da "üçlü konsey" → alt küme (üçlüde
-  aşağıdaki kalibrasyonun en yüksek üç sesi). En az 3 üye.
-- **Dil**: kullanıcının yazdığı dil. Başlıklar temadaki gibi kalır.
+  (2) projedeki `.claude/konsey.json` içindeki `"tema"`; (3) CLAUDE.md ya da hafızada yazan bir tercih
+  ("Konsey teması: kurtlar"); (4) `~/.claude/konsey.json` içindeki `"tema"`; (5) `klasik`. Başka bir tema adı
+  verildiyse `themes/<ad>.md` dosyasını oku (aynı tablo biçimi); dosya yoksa `klasik` kullan ve bunu bir satırla söyle.
+- **Mod**: `standart` (varsayılan) | `hizli` | `derin`. "hızlı/kısaca/quick" → hizli; "derin/detaylı/çapraz
+  sorgu/deep" → derin. Varsayılan mod da temayla aynı öncelik sırasıyla (`.claude/konsey.json`, CLAUDE.md/hafıza,
+  `~/.claude/konsey.json` içindeki `"mod"`) değişir. Alt-ajan (Agent) aracın yoksa her zaman `hizli`.
+- **Üyeler**: varsayılan yedisi. `--uyeler eleştirmen,mühendis,analist` → yalnızca adı geçen üyeler konuşur ve
+  yalnızca onlar için alt-ajan başlatılır. Rol adı (Türkçe karakterli ya da karaktersiz: `elestirmen`, `muhendis`),
+  İngilizce rol adı (`adversary`, `engineer`…) ya da temadaki isim (`Testere Necmi`) kabul edilir. "üçlü konsey" →
+  aşağıdaki kalibrasyonda konunun en yüksek üç sesi. En az 3 üye; daha azı verilirse kalibrasyondan tamamla ve
+  bunu söyle. Banner'daki `üye:` sayısı konuşan üye sayısıdır; azınlık görüşü de bu üyelerden biri olur.
+- **Dil**: kullanıcının yazdığı dil. Türkçe dışındaki bir dilde tartışmanın tamamını (üye metinleri, karar,
+  riskler, adımlar) o dilde yaz ve 6. adımdaki etiketleri de o dile çevir; tema isimleri (Testere Necmi…) değişmez.
 
 ## 1. Dosya (bağlam)
 
@@ -111,6 +121,13 @@ Banner başlığı: `KURTLAR KONSEYİ`
 başlat. Tip: `konsey-uyesi` (eklentide `konsey:konsey-uyesi`), yoksa `general-purpose`. Açıklama: `konsey: {İsim}`.
 Diğer üyelerin görüşlerini **verme**.
 
+Alt-ajan kuralları (her iki tur için):
+- Araç `run_in_background` parametresini destekliyorsa `run_in_background: false` ver: sonraki adımın bütün
+  yanıtlara bağlı, sonuçlar doğrudan araç yanıtı olarak gelsin.
+- Her üye için tur başına **tam bir** alt-ajan. Aynı üyeyi ikinci kez başlatma; yanıtı gelmiş üye tamamdır.
+- Yine de arka planda çalıştılarsa bütün yanıtlar gelene kadar çıktı yazma, ara durum mesajı da yazma. Çıktıyı
+  verdikten sonra aynı üyeden gelen tekrar bildirimleri yeni bilgi değildir: konseyi yeniden anlatma, yorum yapma.
+
 ```
 Sen bir karar konseyinin üyesisin: {İsim} ({Rol}).
 UZMANLIĞIN: {Rol tablosundaki Odak, Ne arar, Kör noktası}
@@ -133,20 +150,30 @@ FİKRİMİ DEĞİŞTİRİR: <pozisyonu tersine çevirecek olgu>
 
 ## 5. İkinci tur — çapraz sorgu (yalnızca derin)
 
-Birinci tur yanıtlarını karıştırıp `Üye A`, `Üye B`… diye isimsizleştir. Her üyeye listeyi (kendi harfini
-söyleyerek) yeni bir alt-ajanla gönder ve şunu iste (en fazla 120 kelime):
+Birinci tur yanıtlarını karıştırıp `Üye A`, `Üye B`… diye isimsizleştir: listede yalnızca harf ve yanıt
+metni olur, **hiçbir üyenin adı ya da rolü yazmaz**. Harf–isim eşlemesini yalnızca sen tut. Her üye için yeni bir
+alt-ajanı (açıklama: `konsey: {İsim} · çapraz sorgu`) yine **tek mesajda paralel** başlat ve şu metni gönder:
 
 ```
+Sen {İsim} ({Rol}) olarak bir karar konseyindesin. Birinci turdaki görüşler aşağıda; isimler gizli.
+Senin görüşün: Üye {kendi harfi}.
+SORU: {soru}
+GÖRÜŞLER:
+Üye A: {yanıt}
+Üye B: {yanıt}
+…
+GÖREV (en fazla 120 kelime, dil: {dil}):
 İTİRAZ: <kendin dışındaki en zayıf görüşün harfi ve neden>
-SIRALAMA: <kendin hariç en güçlü iki görüşün harfleri>
+SIRALAMA: <kendin hariç en güçlü iki görüşün harfleri, güçlüden zayıfa>
 POZİSYON GÜNCELLEMESİ: <"değişmedi" ya da yeni tek cümle + neden>
 ```
 
-Puan: 1. sıra 2, 2. sıra 1. İtirazları tartışmada hedef üyenin adıyla göster.
+Puan: 1. sıra 2, 2. sıra 1. Puanları harflere göre topla, sonra isimleri aç. İtirazları tartışmada hedef üyenin
+adıyla göster; pozisyonunu değiştiren üye bunu kendi bloğunda söyler ("…itirazından sonra fikrimi değiştirdim").
 
 ## 6. Çıktı
 
-Aşağıdaki biçimi **aynen** kullan (kod bloğu içine koyma; çizgiler düz metin). Önüne ya da arkasına yorum ekleme.
+Aşağıdaki biçimi **aynen** kullan (kod bloğu içine koyma; çizgiler düz metin). Önüne ya da arkasına yorum ekleme (7. adımdaki karar defteri satırı hariç).
 
 ```
 ═══════════════════════════════════════════════════════════════════
@@ -161,6 +188,14 @@ Aşağıdaki biçimi **aynen** kullan (kod bloğu içine koyma; çizgiler düz m
 ──────────────────────────────────────────────────────────────────
 
 {… diğer üyeler; Eleştirmen hep ilk, Hümanist hep son …}
+
+{derin modda bu bölüm de var:}
+──────────────────────────────────────────────────────────────────
+
+ÇAPRAZ SORGU — isimsiz sıralama
+  Puanlar: Üye {harf} ({isim}) {puan} · Üye {harf} ({isim}) {puan} · … (yüksekten düşüğe, hepsi)
+  İtirazlar: {isim} → {hedef isim}: {tek cümle} (üye başına bir satır)
+  Fikrini değiştiren: {isimler ya da "yok"}
 
 ═══════════════════════════════════════════════════════════════════
              {Başkan başlığı}
@@ -206,12 +241,41 @@ Kurallar:
 - Tam **3** risk, tam **5** adım. Güven %30–90. "Duruma göre değişir" yok.
 - `[VARSAYIM]` olan bir şeyi kesin bilgi gibi sunma.
 
+**Türkçe dışı diller.** Etiketleri kullanıcının diline çevir. İngilizce: `KONSEY` → `COUNCIL`,
+`mod: … · üye: …` → `mode: … · members: …`, rol başlıkları → `⚔ ADVERSARY`, `📈 STRATEGIST`, `🔬 ANALYST`,
+`🎨 VISIONARY`, `⚙ ENGINEER`, `🧘 PHILOSOPHER`, `❤ HUMANIST`; `KARAR — KONSEY BAŞKANI` → `VERDICT — COUNCIL CHAIR`
+(kurtlar: `VERDICT — BARON MEHMET KARAHANLI`); `KARAR:` → `VERDICT:`, `GÜVEN:` → `CONFIDENCE:`, `Dağılım` →
+`Split`, `Kanıt` → `Evidence`, `KRİTİK RİSKLER` → `CRITICAL RISKS`, `SONRAKİ ADIMLAR` → `NEXT STEPS`,
+`AZINLIK GÖRÜŞÜ` → `MINORITY REPORT`, `FİKRİMİ DEĞİŞTİRİR` → `WHAT WOULD CHANGE MY MIND`, `ÇAPRAZ SORGU — isimsiz
+sıralama` → `CROSS-EXAMINATION — anonymous ranking`, `Üye A` → `Member A`. Kurtlar temasında karakter adları ve
+banner (`KURTLAR KONSEYİ`) aynı kalır.
+
 ## 7. Sonrası
 
 - Takip sorusunu sohbet olarak cevapla; açıkça istenmedikçe konseyi yeniden toplama.
-- "kaydet" / "karar defterine yaz" denirse kararı proje kökündeki `KONSEY.md` sonuna tarihli bölüm olarak ekle
-  (soru, mod, tema, karar, güven, riskler, adımlar, azınlık görüşü). İstenmeden dosya yazma.
-- "Sonuç şöyle oldu, yeniden değerlendirin" denirse eski kararı ve yeni olguyu dosyaya `[OLGU]` olarak koyup yeniden topla.
+- "kaydet" / "karar defterine yaz" / "save" denirse kararı proje kökündeki `KONSEY.md` dosyasının sonuna ekle;
+  dosya yoksa `# Konsey karar defteri` başlığıyla oluştur. İstenmeden dosya yazma.
+  - İstek konseyi isteyen mesajdaysa: kararı oluşturduktan sonra **önce dosyayı yaz**, sonra 6. adımın çıktısını
+    tek mesajda ver ve çıktının en altına tek satır ekle: `Karar defterine yazıldı: KONSEY.md` (İngilizcede
+    `Saved to the decision log: KONSEY.md`). Böylece kullanıcının son gördüğü şey karar olur.
+  - Sonradan istenirse: dosyaya yaz ve aynı satırla doğrula.
+
+  Bölüm biçimi (tarih: bugünün tarihi, YYYY-AA-GG):
+
+  ```
+  ## {YYYY-AA-GG} — {sorunun özü}
+  - Mod / tema / üye: {mod} / {tema} / {n}
+  - Karar: {KARAR cümlesi}
+  - Güven: %{yüzde} — {gerekçe}
+  - Riskler: 1) … 2) … 3) …
+  - Adımlar: 1) … 2) … 3) … 4) … 5) …
+  - Azınlık görüşü: {üye}: {özet}
+  - Fikrimi değiştirir: {olgu}
+  - Sonuç: (bekleniyor)
+  ```
+
+- "Sonuç şöyle oldu, yeniden değerlendirin" denirse `KONSEY.md`'deki eski kararı okuyup ilgili bölümün `Sonuç:`
+  satırını güncelle; eski kararı ve yeni olguyu dosyaya (bağlam) `[OLGU]` olarak koyup konseyi yeniden topla.
 
 ## Kalite kontrol
 

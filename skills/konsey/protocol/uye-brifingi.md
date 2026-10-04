@@ -44,3 +44,4 @@ FİKRİMİ DEĞİŞTİRİR: <hangi yeni olgu pozisyonunu tersine çevirir>
 - `{TEMA_ISIM}` ve `{TEMA_USLUP}`: `themes/<tema>.md` tablosundaki satır.
 - `{DIL}`: kullanıcının dili.
 - Alt-ajan açıklaması (description) olarak `konsey: {TEMA_ISIM}` kullan; kullanıcı ilerlemeyi böyle görür.
+- Bütün üyeleri tek mesajda, mümkünse `run_in_background: false` ile başlat; her üye için tek alt-ajan.

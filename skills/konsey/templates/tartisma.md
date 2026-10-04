@@ -28,9 +28,23 @@
 {…}
 ```
 
+Yalnızca `derin` modda, Hümanist'ten sonra ve başkandan önce:
+
+```
+──────────────────────────────────────────────────────────────────
+
+ÇAPRAZ SORGU — isimsiz sıralama
+  Puanlar: Üye {harf} ({isim}) {puan} · Üye {harf} ({isim}) {puan} · … (yüksekten düşüğe, hepsi)
+  İtirazlar: {isim} → {hedef isim}: {tek cümle} (üye başına bir satır)
+  Fikrini değiştiren: {isimler ya da "yok"}
+```
+
+Sıralama üyelere harflerle (isimsiz) yaptırılır; isimler bu bölümde açılır.
+
 ## Kurallar
 
-- Eleştirmen hep ilk, Hümanist hep son konuşur. Ortadaki sıra konuya göre değişebilir.
+- Eleştirmen hep ilk, Hümanist hep son konuşur. Ortadaki sıra konuya göre değişebilir. `--uyeler` ile alt küme
+  seçildiyse yalnızca seçilen üyeler konuşur (aynı sıra kuralıyla).
 - Her üye birinci ağızdan konuşur ("Eleştirmen düşünüyor ki…" değil).
 - Her üye en az bir kez başka bir üyeye adıyla gönderme yapar. Bu göndermeler başkanın eklediği bağlantılardır;
   üyenin pozisyonunu değiştirmez.
