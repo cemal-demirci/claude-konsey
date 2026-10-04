@@ -7,6 +7,7 @@ Denetlenenler:
   - Her temanın 7 rol + başkan satırını ve banner başlığını eksiksiz tanımlaması
   - Üye alt-ajanının yalnızca salt-okunur araçlara sahip olması
   - plugin.json ile marketplace.json sürümlerinin tutarlı olması
+  - Her eval senaryosunun bir istemi ve en az bir değerlendiricisi olması
 """
 import json
 import re
@@ -159,6 +160,44 @@ def check_manifests() -> None:
         err(f"CHANGELOG.md: '## {plugin.get('version')}' başlığı yok")
 
 
+GRADER_TYPES = {"regex", "tool_order", "tool_used", "file_exists", "llm", "baseline"}
+
+
+def check_evals() -> None:
+    """evals/<senaryo>/ ya prompt.md + graders/*.md ya da case.yaml içermeli."""
+    evals = ROOT / "evals"
+    if not evals.is_dir():
+        err("evals/: klasör yok")
+        return
+    cases = [d for d in sorted(evals.iterdir()) if d.is_dir() and d.name not in ("results", "mocks")]
+    if not cases:
+        err("evals/: hiç senaryo yok")
+    for d in cases:
+        rel = d.relative_to(ROOT)
+        case_yaml = d / "case.yaml"
+        if case_yaml.exists():
+            text = case_yaml.read_text(encoding="utf-8")
+            if not re.search(r"^graders:", text, re.M):
+                err(f"{rel}/case.yaml: graders yok")
+            for t in re.findall(r"^\s+type:\s*(\S+)", text, re.M):
+                if t not in GRADER_TYPES:
+                    err(f"{rel}/case.yaml: bilinmeyen değerlendirici tipi: {t}")
+            m = re.search(r"^\s+scaffold_script:\s*(\S+)", text, re.M)
+            if m and not (d / m.group(1)).exists():
+                err(f"{rel}/case.yaml: scaffold_script yok: {m.group(1)}")
+            continue
+        if not (d / "prompt.md").exists():
+            err(f"{rel}: prompt.md ya da case.yaml yok")
+            continue
+        graders = sorted((d / "graders").glob("*.md"))
+        if not graders:
+            err(f"{rel}: graders/*.md yok")
+        for g in graders:
+            t = frontmatter(g).get("type")
+            if t not in GRADER_TYPES:
+                err(f"{g.relative_to(ROOT)}: bilinmeyen ya da eksik type: {t}")
+
+
 def main() -> int:
     check_skill()
     check_themes()
@@ -166,6 +205,7 @@ def main() -> int:
     check_agent()
     check_name_collisions()
     check_manifests()
+    check_evals()
     if errors:
         print("✘ Konsey denetimi başarısız:")
         for e in dict.fromkeys(errors):

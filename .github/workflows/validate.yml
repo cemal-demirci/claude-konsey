@@ -18,3 +18,17 @@ jobs:
         run: |
           python3 -m json.tool .claude-plugin/plugin.json > /dev/null
           python3 -m json.tool .claude-plugin/marketplace.json > /dev/null
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Claude Code manifest denetimi
+        run: npx -y @anthropic-ai/claude-code plugin validate .
+      - name: install.sh (geçici CLAUDE_HOME)
+        run: |
+          export CLAUDE_HOME="$(mktemp -d)"
+          bash scripts/install.sh --tema kurtlar --mod hizli
+          test -f "$CLAUDE_HOME/skills/konsey/SKILL.md"
+          test -f "$CLAUDE_HOME/agents/konsey-uyesi.md"
+          test -f "$CLAUDE_HOME/commands/konsey-topla.md"
+          python3 -c "import json,sys; c=json.load(open(sys.argv[1])); assert c=={'tema':'kurtlar','mod':'hizli'}, c" "$CLAUDE_HOME/konsey.json"
+          ! bash scripts/install.sh --tema olmayan
