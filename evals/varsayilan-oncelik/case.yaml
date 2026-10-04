@@ -1,0 +1,32 @@
+schema_version: "1.0"
+name: varsayilan-oncelik
+description: >
+  Kullanıcı düzeyi ~/.claude/konsey.json (tema kurtlar, mod hizli) ve proje düzeyi .claude/konsey.json (tema klasik)
+  birlikte: tema projeden (klasik), mod kullanıcı dosyasından (hizli) gelmeli. Dosyaları scaffold.sh eval'in geçici
+  HOME'una ve çalışma klasörüne yazar; suite --scaffold ile çalıştırılmalı.
+runs: 1
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "konseyi topla: Küçük bir ajans müşteri projelerinde sabit fiyat mı yoksa saatlik ücret mi almalı?"
+  max_turns: 20
+  timeout_seconds: 600
+  allowed_tools: [Skill, Agent, Read, Glob, Grep]
+graders:
+  - name: kullanici-ayari-okundu
+    type: tool_used
+    tool: Read
+    input_match: 'home/\.claude/konsey\.json|~/\.claude/konsey\.json'
+  - name: proje-temasi-klasik
+    type: regex
+    pattern: '═\s*\n\s*KONSEY\s*\n[\s\S]*⚔ ELEŞTİRMEN[\s\S]*KONSEY BAŞKANI'
+  - name: kurtlar-yok
+    type: regex
+    match: not_contains
+    pattern: 'KURTLAR KONSEYİ|TESTERE NECMİ'
+  - name: kullanici-modu-hizli
+    type: tool_used
+    tool: Agent
+    min: 0
+    max: 0
+    arm: both

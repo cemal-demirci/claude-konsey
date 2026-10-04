@@ -1,0 +1,27 @@
+schema_version: "1.0"
+name: varsayilan-ayar
+description: >
+  Proje düzeyindeki .claude/konsey.json varsayılanı (tema kurtlar, mod hizli) istekte tema/mod yokken uygulanır.
+  Ayar dosyasını scaffold.sh yazar; suite --scaffold ile çalıştırılmalı.
+runs: 1
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "konseyi topla: Küçük bir yazılım ekibi iç yazışma için Slack mi kullanmalı yoksa Discord mu?"
+  max_turns: 20
+  timeout_seconds: 600
+  allowed_tools: [Skill, Agent, Read, Glob, Grep]
+graders:
+  - name: ayar-okundu
+    type: tool_used
+    tool: Read
+    input_match: '\.claude/konsey\.json'
+  - name: kurtlar-temasi
+    type: regex
+    pattern: 'KURTLAR KONSEYİ[\s\S]*TESTERE NECMİ[\s\S]*KARAHANLI'
+  - name: hizli-mod-alt-ajansiz
+    type: tool_used
+    tool: Agent
+    min: 0
+    max: 0
+    arm: both
