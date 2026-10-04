@@ -25,9 +25,9 @@ Claude Code eklentisidir. Her şey Claude'un içinde çalışır: dış model ya
 kurulur, Türkçe ve İngilizce konuşur, GPL-3.0 lisanslıdır. Karakter istemeyenler için `klasik` tema da vardır
 (`--tema klasik`).
 
-<p align="center"><img src="docs/img/konsey-toplanti.png" alt="Kurtlar Konseyi toplantısı: Karahanlı görevleri dağıtır, Testere Necmi, İplikçi Nedim ve Laz Ziya konuşur" width="860"></p>
+![Kurtlar Konseyi toplantısı: Karahanlı görevleri dağıtır, Testere Necmi, İplikçi Nedim ve Laz Ziya konuşur](docs/img/konsey-toplanti.png)
 
-<p align="center"><img src="docs/img/konsey-karar.png" alt="Baron Mehmet Karahanlı'nın hükmü: karar, güven, riskler, adımlar, azınlık görüşü" width="860"></p>
+![Baron Mehmet Karahanlı'nın hükmü: karar, güven, riskler, adımlar, azınlık görüşü](docs/img/konsey-karar.png)
 
 Görüntüler gerçek bir toplantının çıktısıdır; metne dokunulmadı, yalnızca kısaltıldı (`⋮`) ve terminal görünümünde
 render edildi ([`scripts/ekran.py`](scripts/ekran.py)). Toplantının tamamı:
@@ -61,7 +61,7 @@ içeren hiçbir öneri üretmez.
 
 ## Neden hızlı, neden iyi? Ölçtük
 
-<p align="center"><img src="docs/img/olcumler.png" alt="Ölçümler: üye aşaması 83–91 sn'den 53–67 sn'ye; Fable başkan 8,17'ye 7,50; kalibrasyon 6,50'den 7,83'e" width="860"></p>
+![Ölçümler: üye aşaması 83–91 sn'den 53–67 sn'ye; Fable başkan 8,17'ye 7,50; kalibrasyon 6,50'den 7,83'e](docs/img/olcumler.png)
 
 Aşağıdaki rakamlar iddia değil, ölçümdür. Üç gerçek soruda (monolit mi mikroservis mi, freemium açılmalı mı, ajans
 yurtdışına açılmalı mı) toplantıları çalıştırdık, her alt-ajanın başlangıç ve bitişini kaydettik. Çıktıları da
@@ -136,6 +136,21 @@ Konsey artık bir **ekip** gibi çalışıyor:
 
 Başkan **Fable** modelinde ayrı bir alt-ajandır; üyeler kendi modellerinde çalışır. Fable'a erişiminiz yoksa başkanlığı
 Claude oturumunun kendisi üstlenir, çıktı aynı kalır. Görev dağılımı çıktının başında `GÖREV DAĞILIMI` bölümünde görünür.
+
+## Ne çalıştırır, nereye bağlanır?
+
+Konsey yalnızca bir skill, iki alt-ajan tanımı (`konsey-uyesi`, `konsey-baskani`) ve bir komuttan oluşur. Hook,
+MCP sunucusu, betik ya da paket kurulumu **yoktur**; eklenti hiçbir ağ isteği yapmaz ve hiçbir yere veri göndermez.
+Tüm üyeler ve başkan, sizin Claude oturumunuzun içinde alt-ajan olarak çalışır.
+
+- **Okuduğu dosyalar:** sorunuzla ilgili proje dosyaları (yalnızca okuma; alt-ajanların araçları `Read`, `Grep`,
+  `Glob`) ve varsa `.claude/konsey.json` ile `~/.claude/konsey.json` ayar dosyaları.
+- **Yazdığı dosya:** yalnızca siz "kaydet" derseniz projenin kökündeki `KONSEY.md`.
+- **İzin:** skill'in `allowed-tools` alanı, yalnızca `~/.claude/konsey.json` dosyasını okumak ve `KONSEY.md`'yi
+  yazmak/düzenlemek için izin ister. Başka hiçbir izin ayarını değiştirmez.
+- **Model:** başkan alt-ajanı Fable modelini kullanır (erişiminiz yoksa başkanlığı oturumun kendisi üstlenir).
+- `bench/` ve `scripts/` altındaki betikler yalnızca geliştirme içindir (ölçüm, doğrulama, ekran görüntüsü); eklenti
+  kurulduğunda hiçbiri çalışmaz.
 
 ## Neden bir konsey?
 

@@ -1,5 +1,10 @@
 # Değişiklik günlüğü
 
+## 2.4.1
+
+- Anthropic eklenti dizinine başvuru hazırlığı: README görselleri Markdown söz dizimiyle, `homepage` alanı,
+  README'ye "Ne çalıştırır, nereye bağlanır?" bölümü (ağ isteği yok, hook/MCP/betik yok, izinler açıkça).
+
 ## 2.4.0
 
 - **Lisans GPL-3.0-or-later.** 2.3.0 ve önceki sürümler MIT olarak kalır. Persona dosyalarının geldiği
