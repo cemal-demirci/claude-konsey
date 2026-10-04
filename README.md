@@ -38,6 +38,7 @@ değiştirir:
 - **"Fikrimi değiştirir".** Her karar, kendisini tersine çevirecek tek bir olguyu yazar. O olguyu öğrenince
   konseyi yeniden toplayın.
 - **Çapraz sorgu (derin mod).** Üyeler birbirinin görüşüne itiraz eder ve isimleri gizlenmiş görüşleri sıralar.
+  Puanlar ve itirazlar karardan önce ayrı bir `ÇAPRAZ SORGU` bölümünde gösterilir.
 
 ## Kurulum
 
@@ -62,9 +63,12 @@ git clone https://github.com/cemal-demirci/claude-konsey
 cd claude-konsey
 scripts/install.sh                      # klasik tema, standart mod
 scripts/install.sh --tema kurtlar       # varsayılanı Kurtlar Konseyi yap
+scripts/install.sh --tema kurtlar --mod hizli
 ```
 
-Kurulumdan sonra yeni bir Claude Code oturumu açın.
+Betik skill'i, üye alt-ajanını ve komutu `~/.claude` altına kopyalar (hedef `CLAUDE_HOME` ile değiştirilebilir).
+Elle kurulumda komutun adı `/konsey-topla`'dır; eklentide `/konsey:topla`. Kurulumdan sonra yeni bir Claude Code
+oturumu açın.
 
 ## Kullanım
 
@@ -84,7 +88,12 @@ Ya da komutla:
 ```
 
 Konsey yalnızca açıkça istediğinizde toplanır, sıradan kod işlerinde araya girmez. Soruyu hangi dilde
-yazarsanız tartışma o dilde yapılır.
+yazarsanız tartışma o dilde yapılır; Türkçe dışındaki dillerde başlıklar da çevrilir (İngilizcede `VERDICT`,
+`CONFIDENCE`, `CRITICAL RISKS`…), kurtlar temasındaki karakter adları aynı kalır.
+
+`--uyeler` ile yalnızca seçtiğiniz üyeler konuşur ve yalnızca onlar için alt-ajan başlatılır. Rol adı
+(`eleştirmen` ya da `elestirmen`), İngilizce rol adı (`adversary`) ya da temadaki isim (`Testere Necmi`)
+yazabilirsiniz. "üçlü konsey" derseniz konunun en önemli üç sesi seçilir. En az üç üye gerekir.
 
 ### Modlar
 
@@ -107,24 +116,46 @@ Tema yalnızca isimleri ve konuşma üslubunu değiştirir. Üyelerin uzmanlığ
 
 ### Varsayılanları değiştirmek
 
-En kolay yol, `~/.claude/CLAUDE.md` dosyasına tek satır eklemek. Bu dosya her oturumda yüklenir, izin sorulmaz:
+Tema ve mod şu sırayla belirlenir; ilk bulunan geçerlidir:
 
-```
-Konsey teması: kurtlar · Konsey modu: standart
-```
+1. İstekte yazan (`kurtlar konseyi`, `derin mod`, `--tema`, `--mod`)
+2. Projenin kökündeki `.claude/konsey.json` (yalnızca o proje için)
+3. `CLAUDE.md` ya da hafızadaki bir satır, örneğin `~/.claude/CLAUDE.md` içinde:
+   ```
+   Konsey teması: kurtlar · Konsey modu: standart
+   ```
+4. `~/.claude/konsey.json` (`scripts/install.sh --tema kurtlar` bu dosyayı yazar)
+5. Varsayılan: `klasik`, `standart`
 
-Alternatif olarak `~/.claude/konsey.json` dosyası da kullanılabilir. `scripts/install.sh --tema kurtlar` bu dosyayı
-yazar:
+İki JSON dosyası da aynı biçimdedir; alanlar isteğe bağlıdır:
 
 ```json
 { "tema": "kurtlar", "mod": "standart" }
 ```
 
+Konsey bu dosyaları yalnızca okur. Eklenti, `~/.claude/konsey.json` dosyasını izin sormadan okuyabilmek için
+skill'in `allowed-tools` alanında bu tek dosyaya okuma izni ister.
+
 ### Karar defteri
 
-Karardan sonra "kaydet" derseniz karar, projenin kökündeki `KONSEY.md` dosyasına tarihiyle eklenir. Sonra
-"şu karar böyle sonuçlandı, konsey yeniden değerlendirsin" diyebilirsiniz; eski karar ve yeni olgu dosyaya
-eklenerek konsey yeniden toplanır. İstemediğiniz sürece konsey hiçbir dosya yazmaz.
+Karardan sonra ya da isteğin içinde "kaydet" / "karar defterine yaz" derseniz karar, projenin kökündeki
+`KONSEY.md` dosyasının sonuna tarihli bir bölüm olarak eklenir (dosya yoksa oluşturulur):
+
+```
+## 2026-10-04 — Kod incelemesi zorunlu olsun mu?
+- Mod / tema / üye: hizli / klasik / 7
+- Karar: …
+- Güven: %70 — …
+- Riskler: 1) … 2) … 3) …
+- Adımlar: 1) … 2) … 3) … 4) … 5) …
+- Azınlık görüşü: …
+- Fikrimi değiştirir: …
+- Sonuç: (bekleniyor)
+```
+
+Sonra "şu karar böyle sonuçlandı, konsey yeniden değerlendirsin" diyebilirsiniz: `Sonuç:` satırı güncellenir, eski
+karar ve yeni olgu bağlam dosyasına `[OLGU]` olarak eklenip konsey yeniden toplanır. İstemediğiniz sürece konsey
+hiçbir dosya yazmaz; yazabildiği tek dosya `KONSEY.md`'dir.
 
 ## Yeni tema eklemek
 
@@ -149,15 +180,38 @@ scripts/               validate.py, install.sh
 
 ```bash
 python3 scripts/validate.py          # yapı denetimi (CI'da da çalışır)
-claude plugin validate .             # Claude Code manifest denetimi
-claude plugin eval . --ablation none # davranış testleri (kullanım kotası harcar)
+claude plugin validate .             # Claude Code manifest denetimi (CI'da da çalışır)
+
+# davranış testleri (kullanım kotası harcar; tam takım ≈ 5 USD)
+claude plugin eval . --ablation none --scaffold --allow-tools Write Edit -j 4
 ```
 
-Değerlendirme senaryoları şunları sınar:
-- Konsey istenince tetikleniyor mu, sıradan bir kod sorusunda tetiklenmiyor mu?
-- Kurtlar teması doğru isimleri kullanıyor mu?
-- Standart mod gerçekten yedi alt-ajan başlatıyor mu?
-- Karar biçimi doğru mu?
+`--scaffold`, `varsayilan-*` senaryolarının ayar dosyalarını eval'in geçici çalışma klasörüne ve geçici HOME'una
+yazması için;
+`--allow-tools Write Edit`, `karar-defteri` senaryosunun `KONSEY.md` yazabilmesi için gerekir. Senaryolar gerçek
+`~/.claude` klasörünüze dokunmaz.
+
+### Doğrulama
+
+| Senaryo | Sınadığı özellik | Nasıl |
+|---|---|---|
+| `tetiklenir` | Konsey isteyince tetiklenme, hızlı mod, karar biçimi, güven gerekçesi | Skill çağrısı, 0 alt-ajan, `KARAR:`/`GÜVEN: %`/`Dağılım:`/`Kanıt:`/`FİKRİMİ DEĞİŞTİRİR:`, LLM hakem |
+| `tetiklenmez` | Sıradan kod sorusunda tetiklenmeme | Skill çağrısı yok |
+| `standart-alt-ajan` | Standart mod: bağımsız alt-ajanlar, bağlam dosyası | En az 7 alt-ajan, brifinglerde `[OLGU]`/`[VARSAYIM]`/`[BİLİNMİYOR]` |
+| `derin-mod` | Çapraz sorgu ve isimsiz sıralama | En az 14 alt-ajan, 7 brifingde `Senin görüşün: Üye X`, çıktıda `ÇAPRAZ SORGU` bölümü, LLM hakem: harflerin yanında isim yok |
+| `uyeler-alt-kume` | `/konsey:topla --uyeler` | Tam 3 alt-ajan, `üye: 3`, diğer dört üyenin başlığı yok |
+| `kurtlar-tema` | Kurtlar teması | Karakter adları ve başkan |
+| `varsayilan-ayar` | `.claude/konsey.json` varsayılanı | Dosya okunuyor, istekte tema/mod yokken kurtlar teması ve hızlı mod (0 alt-ajan) |
+| `varsayilan-oncelik` | `~/.claude/konsey.json` ve öncelik sırası | Eval'in geçici HOME'una kullanıcı ayarı (kurtlar, hizli), projeye `klasik` yazılır: tema projeden, mod kullanıcı dosyasından gelir |
+| `karar-defteri` | `KONSEY.md` karar defteri | Dosya oluşuyor, tarihli bölümde karar, güven, riskler, adımlar |
+| `dil-ingilizce` | Kullanıcının dili | İngilizce etiketler, Türkçe etiket yok, LLM hakem |
+
+Son çalıştırma (2026-10-04, Claude Code 2.1.289, her senaryo 1 çalıştırma, `tetiklenir`/`tetiklenmez` 2):
+**10/10 senaryo geçti.** Tam takımda 9/10 geçti; `varsayilan-oncelik` yalnızca kendi hazırlık betiğindeki fazla katı
+bir güvenlik denetimi yüzünden başlamadı, betik düzeltilince tek başına çalıştırıldı ve geçti. Aynı yeni senaryolar
+2.0.0 sürümünde 5/9 geçiyordu (derin modda çapraz sorgu bölümü yoktu, İngilizce etiketler, karar defteri ve
+`konsey.json` varsayılanları çalışmıyordu). Tek çalıştırmalık sonuçlardır; model davranışı çalıştırmadan
+çalıştırmaya değişebilir.
 
 ## Katkı ve teşekkür
 
@@ -183,5 +237,14 @@ one-sentence position, a reasoned confidence score, 3 critical risks, 5 next ste
 Everything runs inside Claude, with no external models or API keys.
 
 Install: `claude plugin marketplace add cemal-demirci/claude-konsey && claude plugin install konsey@claude-konsey`.
-Use: `/konsey:topla [--mod hizli|standart|derin] [--tema klasik|kurtlar] <question>`, or just write "council: …".
-The debate is held in the language you ask in.
+Use: `/konsey:topla [--mod hizli|standart|derin] [--tema klasik|kurtlar] [--uyeler adversary,engineer,analyst] <question>`,
+or just write "council: …".
+
+- **Modes:** `hizli` (one pass, no subagents), `standart` (7 independent subagents, default), `derin` (adds a
+  cross-examination round where members rank anonymised opinions; shown as a `CROSS-EXAMINATION` section).
+- **Language:** the debate and its labels (`VERDICT`, `CONFIDENCE`, `CRITICAL RISKS`…) follow the language you ask in.
+- **Defaults:** request > project `.claude/konsey.json` > a line in `CLAUDE.md` > `~/.claude/konsey.json` >
+  `klasik`/`standart`. File format: `{ "tema": "kurtlar", "mod": "hizli" }`.
+- **Decision log:** say "save" and the verdict is appended to `KONSEY.md` in the project root; nothing is written
+  unless you ask.
+- **Verification:** 10 `claude plugin eval` cases cover every feature above (see the table in "Doğrulama").

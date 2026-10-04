@@ -1,5 +1,27 @@
 # Değişiklik günlüğü
 
+## 2.1.0
+
+Her özelliğin gerçekten çalıştığını gösteren eval senaryoları eklendi; eksik kalan davranışlar tamamlandı.
+
+- `derin` mod: çapraz sorgu artık çıktıda görünüyor (`ÇAPRAZ SORGU — isimsiz sıralama` bölümü: puanlar, itirazlar,
+  fikrini değiştirenler). İkinci tur alt-ajanları paralel başlıyor ve görüş listesinde yalnızca harfler var.
+- Varsayılan ayarlar: proje düzeyinde `.claude/konsey.json` desteği. Öncelik: istek > proje dosyası > CLAUDE.md >
+  `~/.claude/konsey.json` > varsayılan. Skill, ayar dosyalarını ilk iş olarak okuyor.
+- `--uyeler`: yalnızca seçilen üyeler için alt-ajan başlıyor; Türkçe karaktersiz, İngilizce ve tema adları kabul
+  ediliyor; azınlık görüşü seçilen üyelerden geliyor.
+- Dil: Türkçe dışındaki dillerde başlık ve etiketler de çevriliyor (İngilizce eşlemesi SKILL.md'de).
+- Karar defteri: `KONSEY.md` bölüm biçimi tanımlandı (tarih, karar, güven, riskler, adımlar, azınlık, `Sonuç:`);
+  "kaydet" konseyi isteyen mesajda da geçebiliyor. Skill yalnızca `KONSEY.md` için yazma izni istiyor.
+- `scripts/install.sh`: `/konsey-topla` komutunu da kuruyor, `--tema`/`--mod` değerlerini doğruluyor, `--help`.
+- `scripts/validate.py`: eval senaryolarının yapısını da denetliyor.
+- CI: `claude plugin validate .` ve geçici klasörde `install.sh` testi eklendi.
+- Alt-ajanlar `run_in_background: false` ile başlatılıyor; arka planda çalışan ortamda bir üyenin iki kez
+  başlatılması ve karardan sonra gelen tekrar bildirimlerine yanıt yazılması engellendi.
+- Yeni eval senaryoları: `derin-mod`, `uyeler-alt-kume`, `karar-defteri`, `varsayilan-ayar`, `varsayilan-oncelik`,
+  `dil-ingilizce`;
+  `standart-alt-ajan` bağlam etiketlerini, `tetiklenir` güven gerekçesini de sınıyor.
+
 ## 2.0.0
 
 - Üyeler artık tek metinde taklit edilmiyor: her üye ayrı bir alt-ajan (`konsey-uyesi`, salt-okunur) olarak
