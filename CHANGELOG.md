@@ -1,5 +1,15 @@
 # Değişiklik günlüğü
 
+## 2.4.0
+
+- **Lisans GPL-3.0-or-later.** 2.3.0 ve önceki sürümler MIT olarak kalır. Persona dosyalarının geldiği
+  Claude-Council-Skill'in MIT bildirimi `NOTICE` dosyasında korunur.
+- **Katkıda bulunanlar ve teşekkür:** Hüseyin Eren Çeykel (@huseyinceykel) ve Muammer Yeşilyağcı (@muammer-yesilyagci),
+  testleri ve geliştirme önerileri için.
+- **README yenilendi:** gerçek toplantı çıktısından ekran görüntüleri (`scripts/ekran.py`), ölçüm grafiği, rozetler.
+- 🥚 Konseyin kapısını çalan gizli bir konuk. Kim olduğunu dizi izleyenler bilir.
+- Üye ajanı, görev metninde kendi `YANIT` şeması gelirse onu kullanır (konuklar için).
+
 ## 2.3.0
 
 - **Varsayılan tema artık `kurtlar`.** Klasik tema `--tema klasik`, "klasik konsey" ya da ayar dosyasıyla seçilir.

@@ -1,5 +1,11 @@
 # Kurtlar Konseyi · Konsey
 
+[![Sürüm](https://img.shields.io/github/v/release/cemal-demirci/claude-konsey?label=s%C3%BCr%C3%BCm&color=e3b341)](https://github.com/cemal-demirci/claude-konsey/releases)
+[![Lisans: GPL-3.0](https://img.shields.io/badge/lisans-GPL--3.0-blue)](LICENSE)
+[![Denetim](https://github.com/cemal-demirci/claude-konsey/actions/workflows/validate.yml/badge.svg)](https://github.com/cemal-demirci/claude-konsey/actions)
+![Eval](https://img.shields.io/badge/eval-12%2F12-brightgreen)
+![Claude Code](https://img.shields.io/badge/Claude%20Code-eklenti-d97757)
+
 **Zor kararınızı tek bir yapay zekâya değil, Kurtlar Konseyi'ne sorun.**
 
 Testere Necmi planın en tehlikeli kusurunu yüzünüze vurur. İplikçi Nedim "Kuzum, hesap kitap konuşalım" diyerek rakamlara
@@ -16,39 +22,19 @@ filozof, hümanist) **birbirinin cevabını görmeden, aynı anda** kendi görü
 - bir **azınlık görüşü** ve kararı tersine çevirecek **tek olgu**
 
 Claude Code eklentisidir. Her şey Claude'un içinde çalışır: dış model ya da API anahtarı yoktur. İki satırda
-kurulur, Türkçe ve İngilizce konuşur, MIT lisanslıdır. Karakter istemeyenler için `klasik` tema da vardır
+kurulur, Türkçe ve İngilizce konuşur, GPL-3.0 lisanslıdır. Karakter istemeyenler için `klasik` tema da vardır
 (`--tema klasik`).
 
-```
-═══════════════════════════════════════════════════════════════════
-                         KURTLAR KONSEYİ
-     "Kahve dükkânı ikinci şubeyi şimdi mi açmalı, bir yıl mı beklemeli?"
-     mod: standart · üye: 7
-═══════════════════════════════════════════════════════════════════
+<p align="center"><img src="docs/img/konsey-toplanti.png" alt="Kurtlar Konseyi toplantısı: Karahanlı görevleri dağıtır, Testere Necmi, İplikçi Nedim ve Laz Ziya konuşur" width="860"></p>
 
-Mehmet Karahanlı · GÖREV DAĞILIMI
-  "Konsey açıktır; önümüzde şahısların heyecanı değil, bir dükkânın ikiye bölünmeye hazır olup olmadığı sorusu var — benim için şahıslar değil, sistem önemlidir."
-  Testere Necmi → Rakamlar bilinmezken iki dükkânı birden batırabilecek en tehlikeli kusur ne, bunu hangi işaretler önceden gösterir?
-  Nizamettin Güvenç → "Kaçabilecek yer" argümanı hangi koşullarda bir yıl beklemenin maliyetinden ağır basar?
-  İplikçi Nedim → "Şimdi aç" kararını rasyonel kılacak asgari sayısal eşikler neler?
-  Laz Ziya → "Şimdi mi, sonra mı" doğru soru mu, daha az riskli bir yol var mı?
-  Kılıç → Dükkân kurucusuz dönsün diye hangi sistemler şart, bunları kurup kanıtlamak kaç ay sürer?
-  Hüsrev Ağa → Büyüme amaç mı, araç mı? On yıllık ufukta hangi ilkeye bakarak karar vermeli?
-  Polat Alemdar → Kurucunun ikiye bölünmesinin insana yükü ne, devretmeye hazır olduğu hangi işaretlerden anlaşılır?
+<p align="center"><img src="docs/img/konsey-karar.png" alt="Baron Mehmet Karahanlı'nın hükmü: karar, güven, riskler, adımlar, azınlık görüşü" width="860"></p>
 
-🔬 İPLİKÇİ NEDİM
-Kuzum, hesap kitap konuşalım. Benim asgari eşiklerim şunlar, hepsi varsayım. Kurucu maaşı düşüldükten sonra son 12 ayda istikrarlı net kâr olmalı ve bu kâr yatırımı 24–36 ayda geri ödemeli. Yatırım parası hariç, iki şubenin 6 …
+Görüntüler gerçek bir toplantının çıktısıdır; metne dokunulmadı, yalnızca kısaltıldı (`⋮`) ve terminal görünümünde
+render edildi ([`scripts/ekran.py`](scripts/ekran.py)). Toplantının tamamı:
+[`bench/sonuclar/2.3.0-soru2.md`](bench/sonuclar/2.3.0-soru2.md). Diğer örnekler: [`examples/`](examples/).
 
-🎨 LAZ ZİYA
-Uşağum, herkes "şimdi mi, sonra mı" diye takvime bakıyor da asıl sınav lokasyon değil, dükkânın kurucusuz dönüp dönmediği. Birkaç milyon TL'lik kira, tadilat ve personel yükünü almak yerine küçük bir …
-
-…
-
-KARAR: Konsey, ikinci şubenin şimdi değil bir yıl sonra açılmasına hükmeder. Bu yıl boş geçmeyecek; ilk şubenin kurucusuz dönebildiğini kanıtlamaya ayrılacak.
-```
-
-Bu, gerçek bir toplantının kısaltılmış hâlidir; tamamı: [`examples/kurtlar-baskan-kahve-subesi.md`](examples/kurtlar-baskan-kahve-subesi.md).
-Tam örnekler için [`examples/`](examples/) klasörüne bakın.
+> 🥚 Konseyin kapısını bazen biri daha çalar. Kim olduğunu dizi izleyenler bilir; adıyla çağırın.
+> Geldiğinde kararın karşısına çıkacak en "erkek" düşmanı kurar ve Karahanlı'yı ona cevap vermeye zorlar.
 
 ---
 
@@ -74,6 +60,8 @@ Hayran temasıdır: kısa, bilinen imza sözler dışında diziden replik alınt
 içeren hiçbir öneri üretmez.
 
 ## Neden hızlı, neden iyi? Ölçtük
+
+<p align="center"><img src="docs/img/olcumler.png" alt="Ölçümler: üye aşaması 83–91 sn'den 53–67 sn'ye; Fable başkan 8,17'ye 7,50; kalibrasyon 6,50'den 7,83'e" width="860"></p>
 
 Aşağıdaki rakamlar iddia değil, ölçümdür. Üç gerçek soruda (monolit mi mikroservis mi, freemium açılmalı mı, ajans
 yurtdışına açılmalı mı) toplantıları çalıştırdık, her alt-ajanın başlangıç ve bitişini kaydettik. Çıktıları da
@@ -338,29 +326,47 @@ yazması için;
 | `uyeler-alt-kume` | `/konsey:topla --tema klasik --uyeler` (klasik tema da sınanır) | Tam 3 üye alt-ajanı + başkan, `üye: 3`, diğer dört üyenin başlığı yok |
 | `kurtlar-baskan` | Karahanlı görev dağıtır ve hükmü verir; karakter sesleri | Başkana `GÖREV DAĞITIMI` ve `HÜKÜM` çağrıları, 7 üye brifinginde başkanın görevi, çıktıda `GÖREV DAĞILIMI`, LLM hakem: karakterler tanınır ama imza söz tekrarı ve abartı yok |
 | `kurtlar-tema` | Kurtlar teması | Karakter adları ve başkan |
+| `dayi-modu` | 🥚 Gizli konuk | Adıyla çağrılınca ayrı bir alt-ajan olarak gelir, kendi bölümü ve başkanın ona cevabı çıktıda; çağrılmadığında (`tetiklenir`) hiç görünmez |
 | `varsayilan-ayar` | `.claude/konsey.json` varsayılanı ezer | Dosya okunuyor, istekte tema/mod yokken projedeki `klasik` tema ve hızlı mod (0 alt-ajan), kurtlar yok |
 | `varsayilan-oncelik` | `~/.claude/konsey.json` ve öncelik sırası | Eval'in geçici HOME'una kullanıcı ayarı (kurtlar, hizli), projeye `klasik` yazılır: tema projeden, mod kullanıcı dosyasından gelir |
 | `karar-defteri` | `KONSEY.md` karar defteri | Dosya oluşuyor, tarihli bölümde karar, güven, riskler, adımlar |
 | `dil-ingilizce` | Kullanıcının dili | İngilizce etiketler, Türkçe etiket yok, LLM hakem |
 
-Son çalıştırma (2.3.0, 2026-10-04, Claude Code 2.1.289): **11/11 senaryo geçti.** `kurtlar-baskan` senaryosunda
+Son çalıştırma (2.4.0, 2026-10-04, Claude Code 2.1.289): **12/12 senaryo geçti.** `kurtlar-baskan` senaryosunda
 karakter sesini değerlendiren hakem 3 oydan 3'ünde "geçti" dedi. Başkanın gerçekten Fable'da çalıştığı ayrıca
 doğrulandı: oturumun kullanım kaydında ayrı bir `claude-fable-5-1` kalemi görünüyor. 2.0.0 sürümünde aynı
 senaryoların 5/9'u geçiyordu. Tek çalıştırmalık sonuçlardır; model davranışı çalıştırmadan çalıştırmaya değişebilir.
 `validate.py`, yerleşik temaların SKILL.md, `themes/` ve üye ajanı tanımında birebir aynı kaldığını da denetler.
 
-## Katkı ve teşekkür
+## Katkıda bulunanlar
 
-- Persona dosyaları ve ilk fikir: [itshussainsprojects/Claude-Council-Skill](https://github.com/itshussainsprojects/Claude-Council-Skill) (MIT).
-  Bu proje onun üzerine bağımsız alt-ajan protokolü, çapraz sorgu, bağlam dosyası, gerekçeli güven, temalar ve
-  eklenti paketlemesi ekler.
+<table>
+<tr>
+<td align="center"><a href="https://github.com/cemal-demirci"><img src="https://github.com/cemal-demirci.png?size=100" width="80" alt=""><br><b>Cemal Demirci</b></a><br><sub>Proje sahibi</sub></td>
+<td align="center"><a href="https://github.com/huseyinceykel"><img src="https://github.com/huseyinceykel.png?size=100" width="80" alt=""><br><b>Hüseyin Eren Çeykel</b></a><br><sub>Test · fikir ve öneriler</sub></td>
+<td align="center"><a href="https://github.com/muammer-yesilyagci"><img src="https://github.com/muammer-yesilyagci.png?size=100" width="80" alt=""><br><b>Muammer Yeşilyağcı</b></a><br><sub>Test · fikir ve öneriler</sub></td>
+</tr>
+</table>
+
+## Teşekkür
+
+- **[Hüseyin Eren Çeykel](https://github.com/huseyinceykel)** ve **[Muammer Yeşilyağcı](https://github.com/muammer-yesilyagci)**:
+  projenin ilk günlerinden beri konseyi gerçek sorularla test ettiler; geliştirmeler için verdikleri fikir ve
+  önerilerle Konsey'i bugünkü hâline getirdiler. Teşekkürler.
+- **[itshussainsprojects/Claude-Council-Skill](https://github.com/itshussainsprojects/Claude-Council-Skill)**: persona
+  dosyaları ve ilk fikir oradan geldi (MIT; bildirimi [NOTICE](NOTICE) dosyasında korunur). Bu proje onun üzerine
+  bağımsız alt-ajan protokolü, başkanın görev dağıtımı, çapraz sorgu, bağlam dosyası, gerekçeli güven, temalar,
+  ölçümler ve eklenti paketlemesi ekler. Ana projeye teşekkürler.
 - Bağımsız görüş ve isimsiz sıralama fikri, "LLM council" yaklaşımından esinlenmiştir.
 - `kurtlar` teması, Kurtlar Vadisi dizisine yapılmış bir hayran göndermesidir. Dizinin yapımcılarıyla ya da
-  oyuncularıyla hiçbir bağı yoktur. Karakterler yalnızca üslup olarak kullanılır; kısa, bilinen imza sözler dışında diziden replik alıntılanmaz.
+  oyuncularıyla hiçbir bağı yoktur. Karakterler yalnızca üslup olarak kullanılır; kısa, bilinen imza sözler dışında
+  diziden replik alıntılanmaz.
 
 ## Lisans
 
-MIT. Ayrıntılar için [LICENSE](LICENSE) dosyasına bakın.
+[GPL-3.0-or-later](LICENSE). Konsey'i kullanabilir, değiştirebilir ve dağıtabilirsiniz; değiştirilmiş sürümleri
+dağıtırsanız kaynak kodunu da aynı lisansla açmanız gerekir. Üçüncü taraf bildirimleri [NOTICE](NOTICE) dosyasındadır.
+2.3.0 ve önceki sürümler MIT lisansıyla yayımlanmıştı; o sürümler için MIT geçerliliğini korur.
 
 ---
 
@@ -391,4 +397,6 @@ or just write "council: …".
   `kurtlar`/`standart`. File format: `{ "tema": "kurtlar", "mod": "hizli" }`.
 - **Decision log:** say "save" and the verdict is appended to `KONSEY.md` in the project root; nothing is written
   unless you ask.
-- **Verification:** 11 `claude plugin eval` cases (all passing on 2.3.0) cover every feature above (see the table in "Doğrulama").
+- **Verification:** 12 `claude plugin eval` cases (all passing on 2.4.0) cover every feature above (see the table in "Doğrulama").
+- **License:** GPL-3.0-or-later (2.3.0 and earlier: MIT). Thanks to Hüseyin Eren Çeykel and Muammer Yeşilyağcı for testing
+  and ideas, and to itshussainsprojects/Claude-Council-Skill for the original personas.

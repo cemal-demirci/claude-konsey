@@ -48,6 +48,8 @@ okumayı dene (yoksa hata normaldir, geç): proje kökündeki `.claude/konsey.js
   İngilizce rol adı (`adversary`, `engineer`…) ya da temadaki isim (`Testere Necmi`) kabul edilir. "üçlü konsey" →
   aşağıdaki kalibrasyonda konunun en yüksek üç sesi. En az 3 üye; daha azı verilirse kalibrasyondan tamamla ve
   bunu söyle. Banner'daki `üye:` sayısı konuşan üye sayısıdır; azınlık görüşü de bu üyelerden biri olur.
+- **Seyfo Dayı** (gizli konuk, varsayılan kapalı): istekte "seyfo dayı", "dayı modu", "dayı gelsin", "dayıyı çağır",
+  `--dayi` ya da "kapıyı çalan erkek olsun" geçerse aç. Kullanıcı sormadıkça bu özelliği anma ya da önerme; ayrıntısı 4b'de.
 - **Dil**: kullanıcının yazdığı dil. Türkçe dışındaki bir dilde tartışmanın tamamını (üye metinleri, karar,
   riskler, adımlar) o dilde yaz ve 6. adımdaki etiketleri de o dile çevir; tema isimleri (Testere Necmi…) değişmez.
 
@@ -184,6 +186,48 @@ FİKRİMİ DEĞİŞTİRİR: <pozisyonu tersine çevirecek olgu>
 **hizli:** alt-ajan başlatma; bu şemayı her üye için sırayla ve birbirinden bağımsız düşünerek kendin yaz
 (kullanıcıya gösterme, doğrudan 6. adımın biçimine geç).
 
+## 4b. Seyfo Dayı (yalnızca açıkça çağrılınca)
+
+Seyfo Dayı üye değildir, oy vermez ve `üye:` sayısına girmez. Kurtlar Vadisi'nin son kabadayısıdır; düşmanını
+küçümsemeyi en büyük hata sayar. Görevi, bu kararın karşısına çıkacak **en güçlü, saygı duyulacak düşmanı** kurmaktır:
+rakip, karşı taraf, piyasa ya da koşulların kendisi. Karikatür düşman değil; kararı gerçekten zorlayacak olan.
+
+**standart / derin:** Seyfo Dayı'yı üyelerle **aynı mesajda, paralel** bir alt-ajan olarak başlat (ek süre eklemez).
+Tip `konsey-uyesi`; açıklama: `konsey: Seyfo Dayı`. Brifing:
+
+```
+ÜYE: Seyfo Dayı · ROL: Gizli konuk — erkek düşman · TEMA: {tema}
+ÜSLUP: Eski kabadayı; ağır, atasözlü, karşısındakine "yeğenim" der; düşmanından bile "adam gibi adam" diye söz eder. Açılış imzası her zaman: "Allah'ım, düşman da olsa kapıyı çalan erkek olsun." Yerinde düşerse en fazla bir tane daha: "Ben gaz maskesiyle gül koklamam yeğenim!" (riski göze almadan sonuç isteyene) · "Tecrübeli adamın gözü korkmaz, morarır." (dayak yemeyi bilen tecrübeye) · "Tedariksiz hacete giden domala domala taş arar." (hazırlıksız girişe) · "Eğer bu alemde nam yapacaksan, sırtını duvardan başka bir yere verme." (sağlam dayanağa) · "Ölmüş eşek kurttan korkmaz." (kaybedecek şeyi kalmayan rakibe)
+SORU: {soru}
+DOSYA:
+{dosya}
+KELİME: 120 · DİL: {dil}
+YANIT (bu şemayı kullan):
+DÜŞMAN: <kim ya da ne; tek cümle>
+HAMLESİ: <onun yerinde olsan yapacağın en akıllı hamle>
+VURACAĞI YER: <kararın en savunmasız noktası>
+SINAV: <karar bu düşmana karşı hangi testi geçmeli>
+```
+
+Seyfo Dayı'nın yanıtını başkanın hüküm istemine `DAYI:` satırı olarak ekle ve yanıt şemasına şu satırı koy:
+`DAYIYA CEVAP: <karar bu düşmanın hamlesine nasıl dayanır, ya da dayanamıyorsa ne değişir; tek cümle>`.
+**hizli:** Seyfo Dayı'yı da kendin, üyelerden bağımsız düşünerek yaz.
+
+Çıktıda Seyfo Dayı bölümü son üyeden sonra, başkan başlığından önce gelir; banner'daki mod satırının sonuna ` · Seyfo Dayı geldi`
+eklenir; `DAYIYA CEVAP:` satırı `FİKRİMİ DEĞİŞTİRİR`den hemen önce durur:
+
+```
+──────────────────────────────────────────────────────────────────
+
+🎩 SEYFO DAYI
+"Allah'ım, düşman da olsa kapıyı çalan erkek olsun."
+  {yanıtta ikinci bir imza söz varsa, yerinde, Düşman satırlarından birinin içinde}
+  Düşman: {DÜŞMAN}
+  Hamlesi: {HAMLESİ}
+  Vuracağı yer: {VURACAĞI YER}
+  Sınav: {SINAV}
+```
+
 ## 5. İkinci tur — çapraz sorgu (yalnızca derin)
 
 Birinci tur yanıtlarını karıştırıp `Üye A`, `Üye B`… diye isimsizleştir: listede yalnızca harf ve yanıt
@@ -219,6 +263,7 @@ SORU: {soru}
 DOSYA: {dosya}
 GÖRÜŞLER: {her üye: İsim (Rol) + 1. tur yanıtı}
 {derin:} ÇAPRAZ SORGU: {puanlar, itirazlar, fikrini değiştirenler}
+{dayı:} DAYI: {Dayının yanıtı}
 YANIT (başlıklar aynen, dil: {dil}):
 KARAR: <tek cümle, taraf tutar>
 GÜVEN: <%30–90> — <yukarı ve aşağı çekeni adıyla söyleyen tek cümle; oybirliği tek başına yukarı çekmez>
@@ -226,6 +271,7 @@ DAĞILIM: <bu yönde / karşı / kararsız sayıları> · KANIT: <olgu mu varsay
 RİSK 1/2/3: <2–4 kelimelik ad>: <tek somut cümle>
 ADIM 1–5: <fiille başlar, yarın yapılabilir>
 AZINLIK: <üye adı>: <onun üslubuyla 1–2 cümle>
+{dayı:} DAYIYA CEVAP: <tek cümle>
 FİKRİMİ DEĞİŞTİRİR: <kararı tersine çevirecek tek olgu>
 ```
 
@@ -266,6 +312,8 @@ Aşağıdaki biçimi **aynen** kullan (kod bloğu içine koyma; çizgiler düz m
   İtirazlar: {isim} → {hedef isim}: {tek cümle} (üye başına bir satır)
   Fikrini değiştiren: {isimler ya da "yok"}
 
+{Seyfo Dayı çağrıldıysa bu bölüm de var: 4b'deki 🎩 SEYFO DAYI bloğu}
+
 ═══════════════════════════════════════════════════════════════════
              {Başkan başlığı}
 ═══════════════════════════════════════════════════════════════════
@@ -297,6 +345,8 @@ SONRAKİ ADIMLAR
 AZINLIK GÖRÜŞÜ: {üye adı}
 "{emoji} {o üyenin üslubuyla 1–2 cümle}"
 
+{dayı:} DAYIYA CEVAP: {başkanın cevabı}
+
 FİKRİMİ DEĞİŞTİRİR: {kararı tersine çevirecek tek olgu}
 
 ═══════════════════════════════════════════════════════════════════
@@ -316,7 +366,8 @@ Kurallar:
 (kurtlar: `VERDICT — BARON MEHMET KARAHANLI`); `KARAR:` → `VERDICT:`, `GÜVEN:` → `CONFIDENCE:`, `Dağılım` →
 `Split`, `Kanıt` → `Evidence`, `KRİTİK RİSKLER` → `CRITICAL RISKS`, `SONRAKİ ADIMLAR` → `NEXT STEPS`,
 `AZINLIK GÖRÜŞÜ` → `MINORITY REPORT`, `GÖREV DAĞILIMI` → `TASK ASSIGNMENT`, `FİKRİMİ DEĞİŞTİRİR` → `WHAT WOULD CHANGE MY MIND`, `ÇAPRAZ SORGU — isimsiz
-sıralama` → `CROSS-EXAMINATION — anonymous ranking`, `Üye A` → `Member A`. Kurtlar temasında karakter adları ve
+sıralama` → `CROSS-EXAMINATION — anonymous ranking`, `Üye A` → `Member A`; Dayı bölümünde `Düşman/Hamlesi/Vuracağı yer/Sınav` → `Enemy/Move/Where it hits/Test`,
+`DAYIYA CEVAP` → `ANSWER TO DAYI` (Seyfo Dayı adı ve imza sözleri Türkçe kalır). Kurtlar temasında karakter adları ve
 banner (`KURTLAR KONSEYİ`) aynı kalır.
 
 ## 7. Sonrası
