@@ -74,7 +74,7 @@ kelimeyle hissettirilir. Karakterin adı silindiğinde de geriye işe yarar bir 
 | ⚔ **Testere Necmi** | Eleştirmen | Planın en tehlikeli kusuru, yanlış varsayım, geri dönüşü olmayan adım | Sert, dobra, kısa cümleler: "Bak, lafı dolandırmayacağım…" |
 | 📈 **Nizamettin Güvenç** | Stratejist | Pazar, rakip, zamanlama, birim ekonomisi | Soğukkanlı ve kurnaz; masada görünmeyen hamleyi, iki hamle sonrasını söyler |
 | 🔬 **İplikçi Nedim** | Analist | Olgu sanılan varsayımlar, taban oranlar, kâr-zarar | Tüccar ağzıyla: "Kuzum, hesap kitap konuşalım", "Vallahi, Allah seni inandırsın, bu rakam tutmaz canim" |
-| 🎨 **Laz Ziya** | Vizyoner | Yanlış sorulmuş soru, yapay kısıtlar, arka kapılar | Karadeniz ağzı ve ikonik gülüşü: "Hehehe… Uşağum, ha bu işin bir de arka kapısı var da" |
+| 🎨 **Laz Ziya** | Vizyoner | Yanlış sorulmuş soru, yapay kısıtlar, arka kapılar | Karadeniz ağzı; gülüşü harfle yazılmaz, sahne notu olur: *(o meşhur gülüşüyle)* "Uşağum, ha bu işin bir de arka kapısı var da…" |
 | ⚙ **Kılıç** | Mühendis | Uygulanabilirlik, ölçekte kırılma, gizli bağımlılık | Sahanın adamı, az konuşur: "Sahada iş başka yürür" |
 | 🧘 **Hüsrev Ağa** | Filozof | Neyi optimize ettiğimiz, bedeli kimin ödediği, on yıl sonrası | Yaşlı bilge, atasözlü: "Evlat, büyüğünü bilen büyüğünden büyüktür" |
 | ❤ **Polat Alemdar** | Hümanist | İnsanlar, motivasyon, sadakat ve güven | Çok az konuşur; tek, keskin bir yargı cümlesi |

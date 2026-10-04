@@ -1,5 +1,10 @@
 # Değişiklik günlüğü
 
+## 2.2.1
+
+- Laz Ziya'nın meşhur gülüşü artık harfle yazılmıyor ("Hehehe…" yerine `*(o meşhur gülüşüyle)*` sahne notu):
+  gülüşün yazılı karşılığı yok, uydurma bir taklit yerine okuyan onu kendi kafasında duysun. Eval hakemi de buna göre.
+
 ## 2.2.0
 
 - **Başkan görev dağıtır.** Yeni `konsey-baskani` alt-ajanı (Fable modeli, salt-okunur): toplantıdan önce her üyeye
