@@ -1,5 +1,17 @@
 # Değişiklik günlüğü
 
+## 2.2.0
+
+- **Başkan görev dağıtır.** Yeni `konsey-baskani` alt-ajanı (Fable modeli, salt-okunur): toplantıdan önce her üyeye
+  kendi alt sorusunu verir (`GÖREV DAĞILIMI`), toplantıdan sonra hükmü yazar. Ana oturum sekreterdir: görevleri
+  iletir, yanıtları toplar, biçimler. Fable erişimi yoksa başkanlığı ana oturum üstlenir.
+- Üye brifingine `BAŞKANIN SANA VERDİĞİ GÖREV` satırı; çıktıya `GÖREV DAĞILIMI` bölümü (İngilizcede `TASK ASSIGNMENT`).
+- **Kurtlar teması orijinal seslerle:** her karaktere kısa imza sözleri (İplikçi Nedim "kuzum… vallahi, Allah seni
+  inandırsın", Laz Ziya "Hehehe… uşağum", Hüsrev Ağa atasözleri, Karahanlı "sistem önemlidir"…) ve abartı ölçüsü:
+  konuşma başına en fazla bir imza söz, hafif şive, içerik önce.
+- Eval: `kurtlar-baskan` senaryosu (başkan çağrıları, görevli üyeler, karakter sesi için LLM hakem); üye sayan
+  ölçütler başkan çağrılarını saymayacak biçimde güncellendi. `validate.py` başkan ajanını da denetliyor.
+
 ## 2.1.0
 
 Her özelliğin gerçekten çalıştığını gösteren eval senaryoları eklendi; eksik kalan davranışlar tamamlandı.

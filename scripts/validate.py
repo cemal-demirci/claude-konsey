@@ -124,15 +124,22 @@ def check_themes() -> None:
 
 
 def check_agent() -> None:
-    fm = frontmatter(ROOT / "agents" / "konsey-uyesi.md")
-    tools = {x.strip() for x in fm.get("tools", "").split(",") if x.strip()}
-    if not tools:
-        err("agents/konsey-uyesi.md: tools belirtilmemiş (boş = tüm araçlar)")
-    elif not tools <= READ_ONLY_TOOLS:
-        err(f"agents/konsey-uyesi.md: salt-okunur olmayan araç: {sorted(tools - READ_ONLY_TOOLS)}")
-    for k in ("name", "description"):
-        if not fm.get(k):
-            err(f"agents/konsey-uyesi.md: {k} yok")
+    for name in ("konsey-uyesi", "konsey-baskani"):
+        path = ROOT / "agents" / f"{name}.md"
+        if not path.exists():
+            err(f"agents/{name}.md: yok")
+            continue
+        fm = frontmatter(path)
+        tools = {x.strip() for x in fm.get("tools", "").split(",") if x.strip()}
+        if not tools:
+            err(f"agents/{name}.md: tools belirtilmemiş (boş = tüm araçlar)")
+        elif not tools <= READ_ONLY_TOOLS:
+            err(f"agents/{name}.md: salt-okunur olmayan araç: {sorted(tools - READ_ONLY_TOOLS)}")
+        for k in ("name", "description"):
+            if not fm.get(k):
+                err(f"agents/{name}.md: {k} yok")
+    if frontmatter(ROOT / "agents" / "konsey-baskani.md").get("model") != "fable":
+        err("agents/konsey-baskani.md: başkan Fable modelinde çalışmalı (model: fable)")
 
 
 def check_name_collisions() -> None:
