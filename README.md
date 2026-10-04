@@ -80,7 +80,7 @@ kelimeyle hissettirilir. Karakterin adı silindiğinde de geriye işe yarar bir 
 | ❤ **Polat Alemdar** | Hümanist | İnsanlar, motivasyon, sadakat ve güven | Çok az konuşur; tek, keskin bir yargı cümlesi |
 | 👑 **Baron Mehmet Karahanlı** | Başkan | Görev dağıtımı ve son hüküm | Ölçülü, otoriter: "Benim için şahıslar değil, sistem önemlidir" |
 
-Hayran temasıdır: diziden uzun replik alıntılamaz, olay uydurmaz; "sert üslup" yalnızca dildedir, şiddet ya da tehdit
+Hayran temasıdır: kısa, bilinen imza sözler dışında diziden replik alıntılamaz, olay uydurmaz; "sert üslup" yalnızca dildedir, şiddet ya da tehdit
 içeren hiçbir öneri üretmez.
 
 ## Neden bir konsey?
@@ -269,7 +269,7 @@ yazması için;
 | `dil-ingilizce` | Kullanıcının dili | İngilizce etiketler, Türkçe etiket yok, LLM hakem |
 
 Son çalıştırma (2.2.0, 2026-10-04, Claude Code 2.1.289; her senaryo 1 çalıştırma, `tetiklenir`/`tetiklenmez` 2):
-**11/11 senaryo geçti.** `kurtlar-baskan` senaryosunda karakter sesini değerlendiren hakem 3 oydan 3'ünde "geçti" dedi.
+**11/11 senaryo geçti.** 2.2.1'deki gülüş değişikliğinden sonra `kurtlar-baskan` yeniden çalıştırıldı ve yine geçti. `kurtlar-baskan` senaryosunda karakter sesini değerlendiren hakem 3 oydan 3'ünde "geçti" dedi.
 Başkanın gerçekten Fable'da çalıştığı ayrıca doğrulandı: başkan alt-ajanı modelini `claude-fable-5-1` olarak
 bildiriyor ve oturumun kullanım kaydında ayrı bir Fable kalemi görünüyor. 2.0.0 sürümünde aynı senaryoların 5/9'u
 geçiyordu. Tek çalıştırmalık sonuçlardır; model davranışı çalıştırmadan çalıştırmaya değişebilir.
@@ -281,7 +281,7 @@ geçiyordu. Tek çalıştırmalık sonuçlardır; model davranışı çalıştı
   eklenti paketlemesi ekler.
 - Bağımsız görüş ve isimsiz sıralama fikri, "LLM council" yaklaşımından esinlenmiştir.
 - `kurtlar` teması, Kurtlar Vadisi dizisine yapılmış bir hayran göndermesidir. Dizinin yapımcılarıyla ya da
-  oyuncularıyla hiçbir bağı yoktur. Karakterler yalnızca üslup olarak kullanılır ve diziden replik alıntılanmaz.
+  oyuncularıyla hiçbir bağı yoktur. Karakterler yalnızca üslup olarak kullanılır; kısa, bilinen imza sözler dışında diziden replik alıntılanmaz.
 
 ## Lisans
 
@@ -306,11 +306,11 @@ or just write "council: …".
   section in the output). Without Fable access the main session takes the chair; the output is the same.
 - **Kurtlar theme:** the same seven roles voiced by the Kurtlar Vadisi council (Testere Necmi, İplikçi Nedim,
   Laz Ziya…), true to the characters with at most one signature line per speech, never caricature.
-- **Modes:** `hizli` (one pass, no subagents), `standart` (7 independent subagents, default), `derin` (adds a
+- **Modes:** `hizli` (one pass, no subagents), `standart` (chair + 7 independent subagents, default), `derin` (adds a
   cross-examination round where members rank anonymised opinions; shown as a `CROSS-EXAMINATION` section).
 - **Language:** the debate and its labels (`VERDICT`, `CONFIDENCE`, `CRITICAL RISKS`…) follow the language you ask in.
 - **Defaults:** request > project `.claude/konsey.json` > a line in `CLAUDE.md` > `~/.claude/konsey.json` >
   `klasik`/`standart`. File format: `{ "tema": "kurtlar", "mod": "hizli" }`.
 - **Decision log:** say "save" and the verdict is appended to `KONSEY.md` in the project root; nothing is written
   unless you ask.
-- **Verification:** 11 `claude plugin eval` cases (all passing on 2.2.0) cover every feature above (see the table in "Doğrulama").
+- **Verification:** 11 `claude plugin eval` cases (all passing on 2.2.0/2.2.1) cover every feature above (see the table in "Doğrulama").
