@@ -1,6 +1,7 @@
 # Üye brifingi (1. tur)
 
-Her üye için aşağıdaki metni doldurup alt-ajana gönder. `{…}` alanlarını değiştir; başka bir şey ekleme.
+Bu uzun brifing yalnızca `konsey-uyesi` ajan tipi yokken (`general-purpose` alt-ajanla) kullanılır; `konsey-uyesi` varken
+SKILL.md'deki kısa brifing yeterlidir. Her üye için aşağıdaki metni doldurup alt-ajana gönder. `{…}` alanlarını değiştir; başka bir şey ekleme.
 Özellikle **diğer üyelerin görüşlerini ekleme**: bağımsızlık bu turun tek amacı.
 
 ---
@@ -16,6 +17,9 @@ KONUŞMA ÜSLUBUN
 
 SORU
 {SORU}
+
+BAŞKANIN SANA VERDİĞİ GÖREV
+{GOREV} — görüşünü bu sorunun etrafında kur, ama asıl soruya taraf tut.
 
 DOSYA (bağlam)
 {DOSYA}

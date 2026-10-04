@@ -1,7 +1,7 @@
 {
   "name": "konsey",
   "displayName": "Konsey",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Kararları 7 bağımsız uzman üyeye (eleştirmen, stratejist, analist, vizyoner, mühendis, filozof, hümanist) tartıştırıp güven yüzdeli bir hüküm veren Claude Code eklentisi. Temalar: klasik, kurtlar.",
   "author": { "name": "Cemal Demirci" },
   "repository": "https://github.com/cemal-demirci/claude-konsey",

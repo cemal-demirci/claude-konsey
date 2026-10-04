@@ -1,0 +1,122 @@
+[
+ {
+  "soru": 1,
+  "sira": "AB",
+  "A": {
+   "gorev": 8,
+   "hukum": 6,
+   "kalibrasyon": 6,
+   "eylem": 8,
+   "genel": 7
+  },
+  "B": {
+   "gorev": 8,
+   "hukum": 7,
+   "kalibrasyon": 7,
+   "eylem": 9,
+   "genel": 8
+  },
+  "kazanan": "B",
+  "gerekce": "İkisi de aynı hükme ve %78'e varıyor, ama Y oybirliğinin ölçüme değil varsayıma dayandığını açıkça söylüyor ve bölme kararını sayısal eşiklere, daha ayrıntılı bir ölçüm planına ve ara çözüme (ayrı işçi süreci) bağlıyor; X ise ölçülmemiş bir çıkarımı [OLGU] diye etiketleyip güveni oybirliğine yaslıyor, buna karşın riskleri seçilen yola daha özgü ve azınlık görüşü daha gerçek."
+ },
+ {
+  "soru": 1,
+  "sira": "BA",
+  "A": {
+   "gorev": 8,
+   "hukum": 8,
+   "kalibrasyon": 7,
+   "eylem": 9,
+   "genel": 8
+  },
+  "B": {
+   "gorev": 8,
+   "hukum": 8,
+   "kalibrasyon": 8,
+   "eylem": 8,
+   "genel": 8
+  },
+  "kazanan": "berabere",
+  "gerekce": "İkisi de aynı hükme aynı güvenle ve varsayım ağırlıklı kanıtı açıkça kabul ederek varıyor; Y maliyeti kişi-ay olarak sayısallaştırıp sınırları CI'da zorlayan daha uygulanabilir adımlar verirken çıkarımı [OLGU] diye etiketliyor, X ise sayısal bölme eşikleri ve oybirliğinin ölçüme dayanmadığını söyleyen daha dürüst kalibrasyonla bunu dengeliyor."
+ },
+ {
+  "soru": 2,
+  "sira": "AB",
+  "A": {
+   "gorev": 7,
+   "hukum": 8,
+   "kalibrasyon": 8,
+   "eylem": 8,
+   "genel": 8
+  },
+  "B": {
+   "gorev": 9,
+   "hukum": 8,
+   "kalibrasyon": 7,
+   "eylem": 9,
+   "genel": 9
+  },
+  "kazanan": "B",
+  "gerekce": "Y'nin görev dağılımı kararı döndüren alt sorulara (pist×rakip×pazar kombinasyonları, darboğaz teşhisi, davet döngüsü, deneme-freemium karşılaştırması) daha keskin yöneliyor ve adımları ile fikir değiştirme koşulu ölçülebilir eşiklere bağlı; X ise oybirliğinin kanıt değil ihtiyat kaynaklı olduğunu daha dürüst kalibre ediyor ve misafir katmanı azınlık görüşünü eyleme taşıyor, ancak üyeleri arasında örtüşme daha fazla ve Y'de 'iki olgu' deyip üç sayması ile %72'lik hafif yüksek güven küçük kusurlar olarak kalıyor."
+ },
+ {
+  "soru": 2,
+  "sira": "BA",
+  "A": {
+   "gorev": 7,
+   "hukum": 8,
+   "kalibrasyon": 8,
+   "eylem": 8,
+   "genel": 8
+  },
+  "B": {
+   "gorev": 8,
+   "hukum": 7,
+   "kalibrasyon": 7,
+   "eylem": 9,
+   "genel": 8
+  },
+  "kazanan": "berabere",
+  "gerekce": "X darboğaz teşhisi, eşikli ölçümler ve iki koşullu tersine çevirme ölçütüyle daha keskin bir eylem planı sunarken Y oybirliğinin kanıt yokluğundan doğduğunu açıkça kaydedip rakip kilidini hükmün en zayıf yanı olarak sahipleniyor ve gerçek bir azınlık alternatifini (misafir katmanı) adımlara taşıyor; ancak Y 'aylık abonelik'i dosyada olmayan bir olgu sayıyor, X ise azınlık görüşünü zayıf işleyip güveni kısmen oybirliğine yaslıyor, bu yüzden üstünlükler birbirini dengeliyor."
+ },
+ {
+  "soru": 3,
+  "sira": "AB",
+  "A": {
+   "gorev": 8,
+   "hukum": 8,
+   "kalibrasyon": 8,
+   "eylem": 8,
+   "genel": 8
+  },
+  "B": {
+   "gorev": 8,
+   "hukum": 6,
+   "kalibrasyon": 5,
+   "eylem": 8,
+   "genel": 7
+  },
+  "kazanan": "A",
+  "gerekce": "X gerçek görüş ayrılığını açıkça gösterip kanıtın varsayım ağırlıklı olduğunu kabul ederek %62 ile tutarlı kalibre ediyor ve pilotu ölçülebilir eşiklere bağlıyor; Y'nin eylem adımları en az o kadar somut olsa da beş kritik sayı bilinmezken 7/0 oybirliğine yaslanan %78 güveni aşırı ve azınlık görüşü hükümle gerçekten çatışmıyor."
+ },
+ {
+  "soru": 3,
+  "sira": "BA",
+  "A": {
+   "gorev": 8,
+   "hukum": 9,
+   "kalibrasyon": 9,
+   "eylem": 9,
+   "genel": 9
+  },
+  "B": {
+   "gorev": 7,
+   "hukum": 6,
+   "kalibrasyon": 5,
+   "eylem": 8,
+   "genel": 7
+  },
+  "kazanan": "A",
+  "gerekce": "Y, kanıtın varsayım ağırlıklı olduğunu açıkça kabul edip 4-3 bölünmeyi ve azınlığın bekleme maliyeti itirazını ciddiye alarak güveni %62'ye indiriyor ve pilotu ölçülebilir eşiklere (pist, marj, kur sınaması, yerel tıkanma verisi) bağlıyor; X ise beş kritik sayı bilinmezken 7/0 oybirliğine yaslanıp %78 güven veriyor ve azınlık görüşü hükümle gerçekten çatışmıyor."
+ }
+]

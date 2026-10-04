@@ -1,0 +1,122 @@
+[
+ {
+  "soru": 1,
+  "sira": "AB",
+  "A": {
+   "gorev": 8,
+   "hukum": 7,
+   "kalibrasyon": 6,
+   "eylem": 9,
+   "genel": 8
+  },
+  "B": {
+   "gorev": 8,
+   "hukum": 8,
+   "kalibrasyon": 8,
+   "eylem": 8,
+   "genel": 8
+  },
+  "kazanan": "B",
+  "gerekce": "X'in adımları ve eşikleri daha ölçülebilir (CI'de kırılan bağımlılık kuralı, %70 CPU, 90 gün) ancak oybirliğini ve doğrulanmamış ekip kapasitesini olgu sayarak %78 güven veriyor; Y kanıtın varsayım ağırlıklı olduğunu dürüstçe ayırıp %70 ile daha tutarlı kalibre ediyor, üyeler arası iddiayı (haftalar sürer) ön koşullarla sınıyor ve büyüme riskini tetikleyicilere bağlıyor."
+ },
+ {
+  "soru": 1,
+  "sira": "BA",
+  "A": {
+   "gorev": 9,
+   "hukum": 8,
+   "kalibrasyon": 7,
+   "eylem": 9,
+   "genel": 9
+  },
+  "B": {
+   "gorev": 7,
+   "hukum": 7,
+   "kalibrasyon": 8,
+   "eylem": 7,
+   "genel": 7
+  },
+  "kazanan": "A",
+  "gerekce": "Y'nin görev dağılımı karar-belirleyici alt sorulara daha keskin yöneliyor, üyeler sayısal tahmin ve kesişim senaryoları üretiyor, adımlar ve fikir-değiştirme eşiği ölçülebilir (derleme düzeyinde sınır, %70 DB CPU, 90 günlük eşik); X ise kanıt zayıflığını güvene daha dürüst yansıtıyor ama eylemleri daha genel, Y'nin 'ekip yükü taşıyamaz'ı [OLGU] diye etiketlemesi ve %78 güveni hafif aşırı."
+ },
+ {
+  "soru": 2,
+  "sira": "AB",
+  "A": {
+   "gorev": 7,
+   "hukum": 8,
+   "kalibrasyon": 8,
+   "eylem": 8,
+   "genel": 8
+  },
+  "B": {
+   "gorev": 8,
+   "hukum": 8,
+   "kalibrasyon": 7,
+   "eylem": 7,
+   "genel": 8
+  },
+  "kazanan": "A",
+  "gerekce": "Y'nin görev dağılımı daha keskin ve üyeler arası gerçek bir anlaşmazlığı (yamyamlaşma mı, ölçülmemiş huni mi) hükme taşıyor, ancak X oybirliğinin kanıttan değil kanıt yokluğunda temkinden doğduğunu açıkça kaydediyor ve adımlarına ölçülebilir eşik (%5 kuralı, 14–30 gün, 60–90 gün) ile somut bir alternatif (misafir katmanı) koyarak az farkla daha uygulanabilir bir karar veriyor."
+ },
+ {
+  "soru": 2,
+  "sira": "BA",
+  "A": {
+   "gorev": 7,
+   "hukum": 8,
+   "kalibrasyon": 7,
+   "eylem": 9,
+   "genel": 8
+  },
+  "B": {
+   "gorev": 8,
+   "hukum": 7,
+   "kalibrasyon": 6,
+   "eylem": 7,
+   "genel": 7
+  },
+  "kazanan": "A",
+  "gerekce": "Y, oybirliğinin kanıttan değil kanıt yokluğunda geri dönülmez adımdan kaçınma ilkesinden doğduğunu açıkça kaydediyor, riskleri sayısallaştırıyor ve adımlara eşik/süre (%5 kesme kuralı, 90 gün, 14–30 gün deneme) koyuyor; X'in görev dağılımı daha az örtüşmeli ve üye çatışmasını (Necmi–Nedim) görünür kılsa da güveni oybirliğine yaslıyor ve adımları ölçülebilir eşiklerden yoksun."
+ },
+ {
+  "soru": 3,
+  "sira": "AB",
+  "A": {
+   "gorev": 8,
+   "hukum": 8,
+   "kalibrasyon": 8,
+   "eylem": 8,
+   "genel": 8
+  },
+  "B": {
+   "gorev": 9,
+   "hukum": 7,
+   "kalibrasyon": 7,
+   "eylem": 8,
+   "genel": 8
+  },
+  "kazanan": "A",
+  "gerekce": "Y'nin görev dağılımı (uzmanlık türü, yerelin tıkanma kanıtları, geri alınabilir pilot) daha keskin ve pilot tasarımı daha uygulanabilir olsa da, X hükmünde olgu-varsayım ayrımını ve ispat yükünü açıkça tartıyor, pilotu ölçülecek eşiklere bağlıyor, AVV/SCC ve tek kişiye bağımlılık gibi soruya özgü riskleri yakalıyor; Y ise pisti bilinmeyen sayarken pilotu koşulsuz açıp 7/7 pilot uzlaşmasını güven gerekçesi yaparak oy saymaya yaklaşıyor."
+ },
+ {
+  "soru": 3,
+  "sira": "BA",
+  "A": {
+   "gorev": 8,
+   "hukum": 8,
+   "kalibrasyon": 8,
+   "eylem": 9,
+   "genel": 8
+  },
+  "B": {
+   "gorev": 7,
+   "hukum": 6,
+   "kalibrasyon": 6,
+   "eylem": 7,
+   "genel": 7
+  },
+  "kazanan": "A",
+  "gerekce": "Y, görevleri kararı belirleyen sınanabilir alt sorulara (kur varsayımının testi, asgari hukuki sistem, kaçış mı strateji mi) bağlıyor, 4/3 bölünmeyi dürüstçe raporlayıp ispat yükünü ve Necmi'nin kör noktasını hükme taşıyor, pilotu ölçülebilir eşiklere (pist, marj, AVV/SCC teklifi) kapılıyor; X ise 5/2 dağılımını 'pratikte hepsi pilot' diyerek yumuşatıyor ve güvenini varsayım ağırlıklı bir uzlaşmaya dayandırıyor."
+ }
+]

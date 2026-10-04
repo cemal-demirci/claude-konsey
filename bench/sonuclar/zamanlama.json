@@ -1,0 +1,323 @@
+[
+ {
+  "run": "A1",
+  "wall_s": 238,
+  "cost": 1.44,
+  "models": [
+   "claude-opus-5-5",
+   "claude-fable-5-1"
+  ],
+  "dagitim": {
+   "n": 1,
+   "wall": 24,
+   "sum": 24,
+   "max": 24
+  },
+  "uye": {
+   "n": 7,
+   "wall": 71,
+   "sum": 57,
+   "max": 11
+  },
+  "hukum": {
+   "n": 1,
+   "wall": 28,
+   "sum": 28,
+   "max": 28
+  }
+ },
+ {
+  "run": "A2",
+  "wall_s": 252,
+  "cost": 1.46,
+  "models": [
+   "claude-opus-5-5",
+   "claude-fable-5-1"
+  ],
+  "dagitim": {
+   "n": 1,
+   "wall": 29,
+   "sum": 29,
+   "max": 29
+  },
+  "uye": {
+   "n": 7,
+   "wall": 78,
+   "sum": 56,
+   "max": 9
+  },
+  "hukum": {
+   "n": 1,
+   "wall": 36,
+   "sum": 36,
+   "max": 36
+  }
+ },
+ {
+  "run": "A3",
+  "wall_s": 300,
+  "cost": 1.51,
+  "models": [
+   "claude-opus-5-5",
+   "claude-fable-5-1"
+  ],
+  "dagitim": {
+   "n": 1,
+   "wall": 48,
+   "sum": 48,
+   "max": 48
+  },
+  "uye": {
+   "n": 7,
+   "wall": 76,
+   "sum": 53,
+   "max": 10
+  },
+  "hukum": {
+   "n": 1,
+   "wall": 64,
+   "sum": 64,
+   "max": 64
+  }
+ },
+ {
+  "run": "B1",
+  "wall_s": 200,
+  "cost": 1.19,
+  "models": [
+   "claude-opus-5-5"
+  ],
+  "dagitim": {
+   "n": 1,
+   "wall": 13,
+   "sum": 13,
+   "max": 13
+  },
+  "uye": {
+   "n": 7,
+   "wall": 66,
+   "sum": 56,
+   "max": 11
+  },
+  "hukum": {
+   "n": 1,
+   "wall": 12,
+   "sum": 12,
+   "max": 12
+  }
+ },
+ {
+  "run": "B2",
+  "wall_s": 220,
+  "cost": 1.25,
+  "models": [
+   "claude-opus-5-5"
+  ],
+  "dagitim": {
+   "n": 1,
+   "wall": 12,
+   "sum": 12,
+   "max": 12
+  },
+  "uye": {
+   "n": 7,
+   "wall": 76,
+   "sum": 54,
+   "max": 11
+  },
+  "hukum": {
+   "n": 1,
+   "wall": 20,
+   "sum": 20,
+   "max": 20
+  }
+ },
+ {
+  "run": "B3",
+  "wall_s": 220,
+  "cost": 1.28,
+  "models": [
+   "claude-opus-5-5"
+  ],
+  "dagitim": {
+   "n": 1,
+   "wall": 11,
+   "sum": 11,
+   "max": 11
+  },
+  "uye": {
+   "n": 7,
+   "wall": 75,
+   "sum": 55,
+   "max": 11
+  },
+  "hukum": {
+   "n": 1,
+   "wall": 25,
+   "sum": 25,
+   "max": 25
+  }
+ },
+ {
+  "run": "C1",
+  "wall_s": 251,
+  "cost": 1.31,
+  "models": [
+   "claude-opus-5-5",
+   "claude-fable-5-1"
+  ],
+  "dagitim": {
+   "n": 1,
+   "wall": 52,
+   "sum": 52,
+   "max": 52
+  },
+  "uye": {
+   "n": 7,
+   "wall": 44,
+   "sum": 57,
+   "max": 13
+  },
+  "hukum": {
+   "n": 1,
+   "wall": 49,
+   "sum": 49,
+   "max": 49
+  }
+ },
+ {
+  "run": "C2",
+  "wall_s": 258,
+  "cost": 1.38,
+  "models": [
+   "claude-opus-5-5",
+   "claude-fable-5-1"
+  ],
+  "dagitim": {
+   "n": 1,
+   "wall": 45,
+   "sum": 45,
+   "max": 45
+  },
+  "uye": {
+   "n": 7,
+   "wall": 52,
+   "sum": 59,
+   "max": 11
+  },
+  "hukum": {
+   "n": 1,
+   "wall": 54,
+   "sum": 54,
+   "max": 54
+  }
+ },
+ {
+  "run": "C3",
+  "wall_s": 253,
+  "cost": 1.34,
+  "models": [
+   "claude-opus-5-5",
+   "claude-fable-5-1"
+  ],
+  "dagitim": {
+   "n": 1,
+   "wall": 46,
+   "sum": 46,
+   "max": 46
+  },
+  "uye": {
+   "n": 7,
+   "wall": 56,
+   "sum": 56,
+   "max": 10
+  },
+  "hukum": {
+   "n": 1,
+   "wall": 45,
+   "sum": 45,
+   "max": 45
+  }
+ },
+ {
+  "run": "D1",
+  "wall_s": 247,
+  "cost": 1.35,
+  "models": [
+   "claude-opus-5-5",
+   "claude-fable-5-1"
+  ],
+  "dagitim": {
+   "n": 1,
+   "wall": 46,
+   "sum": 46,
+   "max": 46
+  },
+  "uye": {
+   "n": 7,
+   "wall": 45,
+   "sum": 54,
+   "max": 10
+  },
+  "hukum": {
+   "n": 1,
+   "wall": 54,
+   "sum": 54,
+   "max": 54
+  }
+ },
+ {
+  "run": "D2",
+  "wall_s": 228,
+  "cost": 1.39,
+  "models": [
+   "claude-opus-5-5",
+   "claude-fable-5-1"
+  ],
+  "dagitim": {
+   "n": 1,
+   "wall": 39,
+   "sum": 39,
+   "max": 39
+  },
+  "uye": {
+   "n": 7,
+   "wall": 50,
+   "sum": 54,
+   "max": 10
+  },
+  "hukum": {
+   "n": 1,
+   "wall": 38,
+   "sum": 38,
+   "max": 38
+  }
+ },
+ {
+  "run": "D3",
+  "wall_s": 282,
+  "cost": 1.41,
+  "models": [
+   "claude-opus-5-5",
+   "claude-fable-5-1"
+  ],
+  "dagitim": {
+   "n": 1,
+   "wall": 53,
+   "sum": 53,
+   "max": 53
+  },
+  "uye": {
+   "n": 7,
+   "wall": 58,
+   "sum": 53,
+   "max": 10
+  },
+  "hukum": {
+   "n": 1,
+   "wall": 62,
+   "sum": 62,
+   "max": 62
+  }
+ }
+]

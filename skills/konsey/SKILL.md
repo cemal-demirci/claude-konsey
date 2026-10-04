@@ -5,7 +5,7 @@ description: >
   analist, vizyoner, mühendis, filozof, hümanist) ve güven yüzdesi, 3 kritik risk ve 5 somut adım içeren bir karar
   verir. Üyeler Claude alt-ajanları olarak birbirinden bağımsız düşünür; başkan (Fable) görev dağıtır ve hükmü verir;
   dış model ya da API anahtarı gerekmez.
-  Temalar: klasik, kurtlar (Kurtlar Vadisi Konseyi). YALNIZCA kullanıcı açıkça istediğinde kullan: "konsey",
+  Temalar: kurtlar (Kurtlar Vadisi Konseyi, varsayılan), klasik. YALNIZCA kullanıcı açıkça istediğinde kullan: "konsey",
   "konseyi topla", "konseye sor", "kurtlar konseyi", "council", "farklı açılardan tartışın", "stratejist/analist/
   mühendis/eleştirmen gözüyle değerlendir", "debate this", "stress-test this". Sıradan kod ya da nasıl-yapılır
   sorularında tetiklenme.
@@ -36,10 +36,10 @@ toplantıdan sonra hükmü verir. Sen (ana oturum) sekretersin: dosyayı hazırl
 okumayı dene (yoksa hata normaldir, geç): proje kökündeki `.claude/konsey.json` ve kullanıcının
 `~/.claude/konsey.json` dosyası. Biçim: `{ "tema": "kurtlar", "mod": "hizli" }` (iki alan da isteğe bağlı).
 
-- **Tema**: `klasik` | `kurtlar`. Öncelik sırası: (1) istekte geçen ("kurtlar konseyi", `--tema kurtlar`);
+- **Tema**: `kurtlar` (varsayılan) | `klasik`. Öncelik sırası: (1) istekte geçen ("kurtlar konseyi", `--tema kurtlar`);
   (2) projedeki `.claude/konsey.json` içindeki `"tema"`; (3) CLAUDE.md ya da hafızada yazan bir tercih
-  ("Konsey teması: kurtlar"); (4) `~/.claude/konsey.json` içindeki `"tema"`; (5) `klasik`. Başka bir tema adı
-  verildiyse `themes/<ad>.md` dosyasını oku (aynı tablo biçimi); dosya yoksa `klasik` kullan ve bunu bir satırla söyle.
+  ("Konsey teması: kurtlar"); (4) `~/.claude/konsey.json` içindeki `"tema"`; (5) `kurtlar`. "klasik konsey", "normal konsey", `--tema klasik` → klasik. Başka bir tema adı
+  verildiyse `themes/<ad>.md` dosyasını oku (aynı tablo biçimi); dosya yoksa `kurtlar` kullan ve bunu bir satırla söyle.
 - **Mod**: `standart` (varsayılan) | `hizli` | `derin`. "hızlı/kısaca/quick" → hizli; "derin/detaylı/çapraz
   sorgu/deep" → derin. Varsayılan mod da temayla aynı öncelik sırasıyla (`.claude/konsey.json`, CLAUDE.md/hafıza,
   `~/.claude/konsey.json` içindeki `"mod"`) değişir. Alt-ajan (Agent) aracın yoksa her zaman `hizli`.
@@ -157,15 +157,22 @@ Alt-ajan kuralları (her iki tur için):
   verdikten sonra aynı üyeden gelen tekrar bildirimleri yeni bilgi değildir: konseyi yeniden anlatma, yorum yapma.
 
 ```
-Sen bir karar konseyinin üyesisin: {İsim} ({Rol}).
-UZMANLIĞIN: {Rol tablosundaki Odak, Ne arar, Kör noktası}
-ÜSLUBUN: {Tema üslubu}. Üslup yalnızca dile yansır; dürüstlüğün değişmez.{kurtlar: İMZAN: {imza sözleri} — en fazla birini, yerinde kullan.}
+ÜYE: {İsim} · ROL: {Rol} · TEMA: {tema}{özel tema ise: \nÜSLUP: {üslup} · İMZA: {imza sözleri}}
 SORU: {soru}
-BAŞKANIN SANA VERDİĞİ GÖREV: {başkanın GÖREV satırı} — görüşünü bu sorunun etrafında kur, ama asıl soruya taraf tut.
-DOSYA: {dosya} — [OLGU] doğrulanmış, [VARSAYIM] doğrulanmamış, [BİLİNMİYOR] cevabı yok.
-KURALLAR: Diğer üyeleri görmüyorsun; uzlaşmacı olma, rolünün söyleyeceğini söyle. [VARSAYIM]'ı olgu gibi kullanma;
-kendi eklediğin bilgiyi [VARSAYIM] diye işaretle. Dosya değiştirme. En fazla {kelime} kelime. Dil: {dil}.
-YANIT (başlıklar aynen):
+GÖREV: {başkanın GÖREV satırı}
+DOSYA:
+{dosya}
+KELİME: {kelime} · DİL: {dil}
+```
+
+Bu kısa brifing yeterlidir: kurallar, yanıt şeması, rol uzmanlıkları ve yerleşik temaların üslubu `konsey-uyesi`
+ajanının kendi tanımında durur, brifinge **kopyalama** (yedi brifing sırayla yazıldığı için her fazla satır toplantıyı
+yavaşlatır). Tip `konsey-uyesi` yoksa (`general-purpose` ile çalışıyorsan) [`protocol/uye-brifingi.md`](protocol/uye-brifingi.md)
+dosyasındaki uzun brifingi kullan.
+
+Üyenin yanıt şeması (ajan tanımındakiyle aynı):
+
+```
 POZİSYON: <tek cümle, bir taraf tut>
 GEREKÇE: <somut: rakam, isim ya da mekanizma>
 KANIT: <dayandığın en önemli olgu/varsayım, etiketiyle>
@@ -174,7 +181,7 @@ GÜVEN: <%30–90>
 FİKRİMİ DEĞİŞTİRİR: <pozisyonu tersine çevirecek olgu>
 ```
 
-**hizli:** alt-ajan başlatma; aynı şemayı her üye için sırayla ve birbirinden bağımsız düşünerek kendin yaz
+**hizli:** alt-ajan başlatma; bu şemayı her üye için sırayla ve birbirinden bağımsız düşünerek kendin yaz
 (kullanıcıya gösterme, doğrudan 6. adımın biçimine geç).
 
 ## 5. İkinci tur — çapraz sorgu (yalnızca derin)
@@ -214,7 +221,7 @@ GÖRÜŞLER: {her üye: İsim (Rol) + 1. tur yanıtı}
 {derin:} ÇAPRAZ SORGU: {puanlar, itirazlar, fikrini değiştirenler}
 YANIT (başlıklar aynen, dil: {dil}):
 KARAR: <tek cümle, taraf tutar>
-GÜVEN: <%30–90> — <yukarı ve aşağı çekeni adıyla söyleyen tek cümle>
+GÜVEN: <%30–90> — <yukarı ve aşağı çekeni adıyla söyleyen tek cümle; oybirliği tek başına yukarı çekmez>
 DAĞILIM: <bu yönde / karşı / kararsız sayıları> · KANIT: <olgu mu varsayım mı ağırlıklı>
 RİSK 1/2/3: <2–4 kelimelik ad>: <tek somut cümle>
 ADIM 1–5: <fiille başlar, yarın yapılabilir>
@@ -347,3 +354,5 @@ banner (`KURTLAR KONSEYİ`) aynı kalır.
 - [ ] Karar tek cümlede taraf tutuyor mu, güvenin gerekçesi somut mu?
 - [ ] Her üyenin görüşü başkanın ona verdiği göreve değiyor mu? İki üye aynı alt soruyu mu almış?
 - [ ] Kurtlar temasında her üye en fazla bir imza söz mü kullanmış; şive abartıya kaçmadan doğal mı?
+- [ ] Güven oybirliğine mi yaslanıyor? Aynı varsayıma dayanan uzlaşma kanıt değildir; kritik bilgiler bilinmiyorsa en fazla %70.
+- [ ] Azınlık görüşü hükümle gerçekten çatışıyor mu?

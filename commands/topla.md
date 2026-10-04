@@ -1,6 +1,6 @@
 ---
 description: Konseyi topla — bir kararı 7 uzman üyeye tartıştırıp hüküm al (konsey skill'ini çağırır)
-argument-hint: "[--tema klasik|kurtlar] [--mod hizli|standart|derin] [--uyeler eleştirmen,mühendis,...] <soru>"
+argument-hint: "[--tema kurtlar|klasik] [--mod hizli|standart|derin] [--uyeler eleştirmen,mühendis,...] <soru>"
 ---
 
 `konsey` skill'ini (Skill aracıyla) çağır ve şu soruyu konseye sun: $ARGUMENTS

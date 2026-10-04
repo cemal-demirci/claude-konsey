@@ -1,5 +1,19 @@
 # Değişiklik günlüğü
 
+## 2.3.0
+
+- **Varsayılan tema artık `kurtlar`.** Klasik tema `--tema klasik`, "klasik konsey" ya da ayar dosyasıyla seçilir.
+- **Kısa brifing, daha hızlı toplantı.** Kurallar, yanıt şeması, rol uzmanlıkları ve yerleşik temaların üslubu/imzaları
+  `konsey-uyesi` ajanının tanımına taşındı; brifingde yalnızca isim, görev, soru ve dosya kalıyor (~2.550 → ~1.570
+  karakter). Ölçümde brifing + üyeler aşaması 83–91 sn'den 53–67 sn'ye indi. `general-purpose` yedeği için uzun
+  brifing `protocol/uye-brifingi.md`'de.
+- **Oybirliği kanıt değildir.** Başkan, aynı varsayıma dayanan uzlaşmayla güveni yükseltmez; kritik bilgiler
+  bilinmiyorsa güven en fazla %70; azınlık görüşü hükümle gerçekten çatışır. Kör hakem karşılaştırmasında 2.3.0,
+  2.2.1'e karşı 6 kararın 5'ini kazandı (kalibrasyon 6,50 → 7,83).
+- `bench/`: zaman damgalı toplantı, aşama çözümlemesi ve kör hakem betikleri, ham sonuçlarıyla.
+- Düzeltme: `scripts/install.sh` başkan ajanını (`konsey-baskani`) kopyalamıyordu.
+- `validate.py`: yerleşik temalar üye ajanı tanımında da birebir aynı olmalı; imza sütunu da karşılaştırılıyor.
+
 ## 2.2.1
 
 - Laz Ziya'nın meşhur gülüşü artık harfle yazılmıyor ("Hehehe…" yerine `*(o meşhur gülüşüyle)*` sahne notu):

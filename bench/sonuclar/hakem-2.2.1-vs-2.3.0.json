@@ -1,0 +1,122 @@
+[
+ {
+  "soru": 1,
+  "sira": "AB",
+  "A": {
+   "gorev": 8,
+   "hukum": 6,
+   "kalibrasyon": 5,
+   "eylem": 8,
+   "genel": 7
+  },
+  "B": {
+   "gorev": 8,
+   "hukum": 8,
+   "kalibrasyon": 8,
+   "eylem": 9,
+   "genel": 8
+  },
+  "kazanan": "B",
+  "gerekce": "Y, oybirliğinin ortak ölçülmemiş varsayıma dayandığını açıkça kabul edip güveni buna göre düşürüyor, bilinmeyenleri adlandırıyor ve veritabanı bölünmesi gibi soruya özgü geri dönülmez riski ve ölçülebilir çıkarma eşiğini koyuyor; X ise oybirliğini güven artırıcı sayıyor, 'taşıyamaz' yargısını olgu diye etiketliyor ve Kılıç–Nizamettin maliyet çelişkisini çözmeden bırakıyor."
+ },
+ {
+  "soru": 1,
+  "sira": "BA",
+  "A": {
+   "gorev": 8,
+   "hukum": 7,
+   "kalibrasyon": 6,
+   "eylem": 9,
+   "genel": 8
+  },
+  "B": {
+   "gorev": 8,
+   "hukum": 9,
+   "kalibrasyon": 9,
+   "eylem": 8,
+   "genel": 9
+  },
+  "kazanan": "B",
+  "gerekce": "Y'nin adımları biraz daha somut (kişi-ay tahmini, 90 günlük eşik, imzalı ağrı tanımı) olsa da X oybirliğinin aynı ölçülmemiş varsayıma yaslandığını açıkça görüp güveni %68'e indiriyor ve azınlığın takvim itirazını ciddiye alıyor; Y ise oybirliğini güven artırıcı sayıp ekibin yükü taşıyamayacağı çıkarımını olgu diye etiketleyerek %78'e çıkıyor."
+ },
+ {
+  "soru": 2,
+  "sira": "AB",
+  "A": {
+   "gorev": 7,
+   "hukum": 8,
+   "kalibrasyon": 6,
+   "eylem": 8,
+   "genel": 8
+  },
+  "B": {
+   "gorev": 9,
+   "hukum": 8,
+   "kalibrasyon": 8,
+   "eylem": 8,
+   "genel": 8
+  },
+  "kazanan": "B",
+  "gerekce": "Y'nin görev dağılımı kararı gerçekten ayırt eden alt sorulara (tıkanma huni başında mı dönüşümde mi, savunma sinyalleri, maliyet eşiği) daha az örtüşmeyle yöneliyor ve oybirliğinin bilinmeyenleri kapatmadığını söyleyerek güveni daha tutarlı kalibre ediyor; X ise oybirliğini güveni yükselten etken sayıp %2–5 hesabını dört üyede tekrarlıyor, buna karşın X'in adımlarındaki kapatma eşiği (%5) ve misafir katmanı pilotu daha somut."
+ },
+ {
+  "soru": 2,
+  "sira": "BA",
+  "A": {
+   "gorev": 6,
+   "hukum": 6,
+   "kalibrasyon": 6,
+   "eylem": 8,
+   "genel": 7
+  },
+  "B": {
+   "gorev": 8,
+   "hukum": 8,
+   "kalibrasyon": 8,
+   "eylem": 8,
+   "genel": 8
+  },
+  "kazanan": "B",
+  "gerekce": "X görevleri kararı gerçekten ayıran alt sorulara (tıkanma yeri, savunma sinyali, yayılma mekaniği, maliyet eşiği) dağıtıp oybirliğinin güveni yükseltmediğini açıkça söylerken, Y'nin eylem adımları eşik ve sürelerle en az o kadar somut olsa da üyeleri aynı %2–5 hesabını tekrarlıyor, oybirliğini güven artırıcı sayıyor, dosyada olmayan \"aylık abonelik\"i olgu diye kaydediyor ve azınlık görüşü hükme gerçek bir itiraz taşımıyor."
+ },
+ {
+  "soru": 3,
+  "sira": "AB",
+  "A": {
+   "gorev": 8,
+   "hukum": 8,
+   "kalibrasyon": 8,
+   "eylem": 7,
+   "genel": 7
+  },
+  "B": {
+   "gorev": 8,
+   "hukum": 7,
+   "kalibrasyon": 7,
+   "eylem": 9,
+   "genel": 8
+  },
+  "kazanan": "B",
+  "gerekce": "X ispat yükünü ve 4/3 bölünmeyi daha dürüst tartıyor, ancak Y'nin kararı sayısal erteleme/kapatma eşikleri (6 ay tampon, %30 yoğunlaşma, 100 teklif–2 müşteri–2x ücret), kişisel veri dışı tek hizmet kısıtı ve ölçülebilir pilot tasarımıyla bilinmeyenleri daha hızlı ve uygulanabilir biçimde kapatıyor; Y'nin zayıfı, 7/0 oybirliği iddiasının Nizamettin ve Hüsrev'in daha istekli pozisyonlarını düzleştirmesi."
+ },
+ {
+  "soru": 3,
+  "sira": "BA",
+  "A": {
+   "gorev": 8,
+   "hukum": 8,
+   "kalibrasyon": 8,
+   "eylem": 7,
+   "genel": 8
+  },
+  "B": {
+   "gorev": 8,
+   "hukum": 7,
+   "kalibrasyon": 7,
+   "eylem": 9,
+   "genel": 8
+  },
+  "kazanan": "berabere",
+  "gerekce": "X'in adımları ve eşikleri daha somut, ölçülebilir ve kapanış kriterli (6 ay tampon, %30 yoğunlaşma, 100 teklif, 2x ücret) ama 7/0 dağılımı Nizamettin'in gerçek muhalefetini düzleştiriyor; Y ise 4/3 ayrışmayı dürüstçe gösterip ispat yükünü ve yerel tıkanıklık bilinmeyenini açıkça tartıyor, ancak eylemi büyük ölçüde veri toplamaya erteliyor, dolayısıyla biri eylemde diğeri hüküm ve kalibrasyonda öne geçip dengeleniyor."
+ }
+]

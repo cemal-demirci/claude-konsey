@@ -2,9 +2,10 @@
 # Eklenti sistemi kullanmadan Konsey'i doğrudan ~/.claude altına kurar:
 #   skills/konsey/            skill
 #   agents/konsey-uyesi.md    üye alt-ajanı
+#   agents/konsey-baskani.md  başkan alt-ajanı (Fable)
 #   commands/konsey-topla.md  /konsey-topla komutu (eklentideki /konsey:topla'nın karşılığı)
 #   konsey.json               --tema / --mod verilirse varsayılan ayarlar
-# Kullanım: scripts/install.sh [--tema klasik|kurtlar] [--mod hizli|standart|derin]
+# Kullanım: scripts/install.sh [--tema kurtlar|klasik] [--mod hizli|standart|derin]
 # Hedef klasör CLAUDE_HOME ile değiştirilebilir (varsayılan: ~/.claude).
 set -euo pipefail
 
@@ -35,9 +36,10 @@ mkdir -p "$DEST/skills" "$DEST/agents" "$DEST/commands"
 rm -rf "$DEST/skills/konsey"
 cp -R "$ROOT/skills/konsey" "$DEST/skills/konsey"
 cp "$ROOT/agents/konsey-uyesi.md" "$DEST/agents/konsey-uyesi.md"
+cp "$ROOT/agents/konsey-baskani.md" "$DEST/agents/konsey-baskani.md"
 cp "$ROOT/commands/topla.md" "$DEST/commands/konsey-topla.md"
 echo "✔ skill: $DEST/skills/konsey"
-echo "✔ alt-ajan: $DEST/agents/konsey-uyesi.md"
+echo "✔ alt-ajanlar: $DEST/agents/konsey-uyesi.md, konsey-baskani.md"
 echo "✔ komut: $DEST/commands/konsey-topla.md (/konsey-topla)"
 
 if [[ -n "$TEMA$MOD" ]]; then

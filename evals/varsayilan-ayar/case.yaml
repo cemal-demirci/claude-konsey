@@ -1,7 +1,7 @@
 schema_version: "1.0"
 name: varsayilan-ayar
 description: >
-  Proje düzeyindeki .claude/konsey.json varsayılanı (tema kurtlar, mod hizli) istekte tema/mod yokken uygulanır.
+  Proje düzeyindeki .claude/konsey.json varsayılanı (tema klasik, mod hizli) varsayılan kurtlar temasını ezer; istekte tema/mod yokken uygulanır.
   Ayar dosyasını scaffold.sh yazar; suite --scaffold ile çalıştırılmalı.
 runs: 1
 context:
@@ -16,9 +16,13 @@ graders:
     type: tool_used
     tool: Read
     input_match: '\.claude/konsey\.json'
-  - name: kurtlar-temasi
+  - name: klasik-temasi
     type: regex
-    pattern: 'KURTLAR KONSEYİ[\s\S]*TESTERE NECMİ[\s\S]*KARAHANLI'
+    pattern: '═\s*\n\s*KONSEY\s*\n[\s\S]*⚔ ELEŞTİRMEN[\s\S]*KONSEY BAŞKANI'
+  - name: kurtlar-yok
+    type: regex
+    match: not_contains
+    pattern: 'KURTLAR KONSEYİ|TESTERE NECMİ'
   - name: hizli-mod-alt-ajansiz
     type: tool_used
     tool: Agent

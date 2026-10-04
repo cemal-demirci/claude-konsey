@@ -73,7 +73,7 @@ def theme_rows(text: str) -> dict[str, list[str]]:
     for line in text.splitlines():
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
         if len(cells) >= 4 and cells[0] in ROLES:
-            rows[cells[0]] = cells[:4]
+            rows[cells[0]] = cells
     return rows
 
 
@@ -96,6 +96,13 @@ def check_inline_themes() -> None:
         fbanner = re.search(r"^Banner başlığı: `([^`]+)`", f.read_text(encoding="utf-8"), re.M)
         if not banner or not fbanner or banner.group(1) != fbanner.group(1):
             err(f"SKILL.md: '{name}' banner başlığı themes/{name}.md ile uyuşmuyor")
+    # Üye ajanı kısa brifingle çalışır: yerleşik temaların üslubu ve imzaları onun tanımında da durur.
+    agent = (ROOT / "agents" / "konsey-uyesi.md").read_text(encoding="utf-8")
+    asections = re.split(r"^## Tema: (\w+)\s*$", agent, flags=re.M)
+    ainline = {asections[i]: asections[i + 1] for i in range(1, len(asections) - 1, 2)}
+    for name, body in inline.items():
+        if theme_rows(ainline.get(name, "").split("\n## ")[0]) != theme_rows(body.split("\n## ")[0]):
+            err(f"agents/konsey-uyesi.md: '{name}' teması SKILL.md ile uyuşmuyor")
 
 
 def check_themes() -> None:
