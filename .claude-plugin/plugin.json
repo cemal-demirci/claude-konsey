@@ -20,5 +20,9 @@
     "subagents",
     "turkish"
   ],
-  "homepage": "https://github.com/cemal-demirci/claude-konsey"
+  "homepage": "https://github.com/cemal-demirci/claude-konsey",
+  "documentationUrl": "https://github.com/cemal-demirci/claude-konsey#readme",
+  "supportUrl": "https://github.com/cemal-demirci/claude-konsey/issues",
+  "privacyPolicyUrl": "https://github.com/cemal-demirci/claude-konsey/blob/main/PRIVACY.md",
+  "termsOfServiceUrl": "https://github.com/cemal-demirci/claude-konsey/blob/main/LICENSE"
 }
