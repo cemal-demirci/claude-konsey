@@ -1,7 +1,7 @@
 {
   "name": "konsey",
   "displayName": "Konsey",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Kurtlar Konseyi: zor kararları 7 bağımsız uzman alt-ajana (eleştirmen, stratejist, analist, vizyoner, mühendis, filozof, hümanist) tartıştırıp, Fable üzerinde çalışan başkanın görev dağıttığı ve güven yüzdeli hüküm verdiği Claude Code eklentisi. Temalar: kurtlar (varsayılan), klasik.",
   "author": {
     "name": "Cemal Demirci"

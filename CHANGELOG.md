@@ -1,5 +1,10 @@
 # Değişiklik günlüğü
 
+## 2.4.2
+
+- Eklenti ikonu (`.claude-plugin/icon.png`): konsey çemberi, yedi üye ve altın başkan.
+- `varsayilan-oncelik` eval betiği `$PWD` yerine `pwd -P` kullanıyor (dizin taramasında yanlış alarm veriyordu).
+
 ## 2.4.1
 
 - Anthropic eklenti dizinine başvuru hazırlığı: README görselleri Markdown söz dizimiyle, `homepage` alanı,

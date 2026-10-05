@@ -9,7 +9,7 @@
       "name": "konsey",
       "source": "./",
       "description": "Kararları 7 bağımsız uzman üyeye tartıştırıp güven yüzdeli bir hüküm veren konsey. Temalar: klasik, kurtlar.",
-      "version": "2.4.1"
+      "version": "2.4.2"
     }
   ]
 }
