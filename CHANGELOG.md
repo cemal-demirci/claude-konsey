@@ -2,8 +2,8 @@
 
 ## 2.4.2
 
-- Eklenti ikonu (`.claude-plugin/icon.png`): konsey çemberi, yedi üye ve altın başkan.
-- `varsayilan-oncelik` eval betiği `$PWD` yerine `pwd -P` kullanıyor (dizin taramasında yanlış alarm veriyordu).
+- Eklenti ikonu: konsey çemberi, yedi üye ve altın başkan.
+- `varsayilan-oncelik` eval betiği çalışma klasörünü `pwd -P` ile okuyor (dizin taramasında yanlış alarm veriyordu).
 
 ## 2.4.1
 
